@@ -106,7 +106,26 @@ Describe the networking requirements for the service.
 
 ### Frontend
 
-The frontend is discoverable entry point into the system.
+The frontend is discoverable entry point into the system. Current specification says services only have one real frontend (many ports may be mapped from it). This constraint might be lifted.
+
+```yaml
+  frontend:
+    type: external
+    ports:
+      - target: rest-api
+        port: 80
+```
+
+The `frontend.type` controls how the frontend is exposed. There are several types that have different implications:
+
+| Type | Description |
+| ---- | ----------- |
+| none | headless service (e.g. not "discoverable" via DNS |
+| internal | service does not have an external addressable IP:Port address |
+| external | service has many external addressable IP:Port (per node) |
+| external:load-balancer | service has one external IP:Port that load balances across all nodes |
+
+The frontend also has a list of open ports. Each port in this list is designed to "map" to a backend port.
 
 ### Backends
 
