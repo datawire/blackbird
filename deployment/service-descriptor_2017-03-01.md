@@ -1,4 +1,4 @@
-# Service Descriptor (Draft: 1)
+# Service Descriptor (Draft: 2017-03-02)
 
 The service descriptor (Servicefile? Can someone think of a better name?) is a service developers primary input to configure a microservices deployment system and is designed to be a primary input into tooling that can use the information contained within to orchestrate internal processes. To that end a service descriptor has the following goals:
 
@@ -28,18 +28,23 @@ A descriptor file is composed of a root YAML document that contains additional Y
 - MUST contain a field `networking` (type = Networking) that describes the ingress path to talk to the service.
 - MAY contain a field `update` (type = Update) that describes the deployment and upgrade strategy to use.
 - MAY contain a field `requirements` (type = Requirements) that specifies required infrastructure dependencies.
+- MAY contain a field `info` (type = [Info](#Information)) that specifies generic information about the service. 
+
+## Information
+
+An information block is an arbitrary map of key/value <String -> Any> that can be used to provide useful context or information to other humans or tooling. 
 
 ## Deployable Artifact
 
-Describes how the service is packaged (e.g. Docker image) and where the deployable artifact can be acquired from.
+Describe how the service is packaged (e.g. Docker image) and where the deployable artifact can be acquired from.
 
 ### Format: Docker Image
 
-| Field     | Value | Type |
-| --------- | ----- | ---- |
-| registry  | Docker registry address | string |
-| name      | Docker image repository | string |
-| resolver  | How the Docker tag should be resolved | DockerTagResolver |
+| Field     | Type, Format |  Description                    | Default   |
+| --------- | ------------ | ------------------------------- | --------- |
+| registry  | string, URI  | Docker registry address         | docker.io |
+| name      | string       | Docker image repository name    |           |
+| resolver  | TagResolver  | Docker tag resolution mechanism | provided  |
 
 Exampe using a static docker tag resolver.
 
@@ -49,32 +54,44 @@ deployable:
   registry: docker.io
   name: datawire/hello
   resolver:
-    type: static 
-    tag: 1.0
+    type: provided 
 ```
 
 #### Tag Resolver
 
-##### Static Resolver
-
-A static tag resolver indicates the Docker tag to use is hard-coded into the descriptor. The use case for this is when an external tool will update the descriptor.
-
-```yaml
-resolver:
-  type: static 
-  tag: 1.0
-```
+To deploy a Docker image the tag is required. Depending on workflows and tooling there are three ways this 
 
 ##### Provided Resolver
 
-A provided tag resolver indicates the Docker tag to use is provided "on-demand" at deployment time. The use case for this is when an external tool will tell the deployment system what Docker image to use just before deploying.
+A provided resolver indicates the Docker tag to use is provided "on-demand" at deployment time. The use case for this is when an external tool will tell the deployment system what Docker image to use just before deploying.
 
 ```yaml
 resolver:
   type: provided 
 ```
 
+##### Query Resolver
+
+A query resolver indicates the deployment system should reach out to a remote endpoint and ask what image to use. The use case for this is when an external tool will update a file or database somewhere with this information.
+
+```yaml
+resolver:
+  type: query
+  address: <URL>
+```
+
 ## Networking
+
+Describe the networking requirements for the service.
+
+### Frontend
+
+The frontend is discoverable entry point into the system.
+
+### Backends
+
+A backend is the exposed ports on the container, for example, a hypothetical "Hello" service exposes two ports: one port is for the REST API while another port hosts an administrative API only the author cares about.
 
 ## Requirements
 
+Requirements are hard dependencies that must be satisfied by the deployment system before the deployment system attempts to start a service.
