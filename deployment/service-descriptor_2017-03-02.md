@@ -181,6 +181,8 @@ Below is an example descriptor based off this specification to give a bit of a "
 ---
 # Draft 2017-03-02: Service Descriptor
 
+__format_version: 2017-03-02
+
 name: hello
 
 deployable:
