@@ -131,6 +131,30 @@ The frontend also has a list of open ports. Each port in this list is designed t
 
 A backend is the exposed ports on the container, for example, a hypothetical "Hello" service exposes two ports: one port is for the REST API while another port hosts an administrative API only the author cares about.
 
+Exposed ports are named and the name is signifgant as frontend ports are mapped to backend ports by their name. Given a configuration such as below:
+
+```yaml
+network:
+  frontend:
+    type: external
+    ports:
+      - target: rest-api
+        port: 80
+
+  backends:
+    - name: rest-api
+      protocol: tcp
+      port: 5001
+```
+
+What is being stated here is that external Port TCP:80 forwards to backend TCP:5001.
+
+| Field | Type, Format | Description |
+| ----- | ------------ | ----------- |
+| name  | string       | name of the port |
+| protocol | string (tcp, udp) | the protocol for the port |
+| port  | int (1..65535) | the actual port number |
+
 ## Requirements
 
 Requirements are cloud infrastructure that needs to be created before a service is launched. The mechanism of creation is left to the deployment system. The `type` parameter on each requirement is customizable and maps to an implementation of how that requirement will be fulfilled (e.g. via Terraform).
