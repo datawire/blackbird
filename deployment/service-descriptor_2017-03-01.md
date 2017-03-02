@@ -26,13 +26,33 @@ A descriptor file is composed of a root YAML document that contains additional Y
 - MUST contain a field `name` (type = String) that indicates the name of the service.
 - MUST contain a field `deployable` (type = Deployable) that describes how the deployable artifact is packaged and resolved.
 - MUST contain a field `networking` (type = Networking) that describes the ingress path to talk to the service.
-- MAY contain a field `update` (type = Update) that describes the deployment and upgrade strategy to use.
+- MAY contain a field `update` (type = [Update](#Update-Strategy)) that describes the deployment and upgrade strategy to use.
 - MAY contain a field `requirements` (type = Requirements) that specifies required infrastructure dependencies.
 - MAY contain a field `info` (type = [Info](#Information)) that specifies generic information about the service. 
 
 ## Information
 
 An information block is an arbitrary map of key/value <String -> Any> that can be used to provide useful context or information to other humans or tooling. 
+
+## Update Strategy
+
+Describe how the service should be upgraded. Different strategies are preferable for a variety of reasons. This specification suggests a couple generic strategies all deployment systems consuming the descriptor should implement, but tooling can respond to any set of options.
+
+If the update strategy is left undefined in the descriptor then "rolling" is assumed.
+
+| Strategy    | Description | 
+| ----------- | ----------- |
+| rolling     | use a simple rolling strategy to update service nodes. |
+| blue-green  | use the blue-green swap strategy to update service nodes. |
+| append-only | continually add new versions of services without removing old versions. |
+
+```yaml
+update:
+  strategy: rolling
+  parameters: {
+    nodes_per_cycle: 2 # tell the deployment system how many nodes to "roll" with each cycle.
+  }
+```
 
 ## Deployable Artifact
 
