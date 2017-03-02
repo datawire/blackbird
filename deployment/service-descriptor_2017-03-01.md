@@ -114,14 +114,30 @@ A backend is the exposed ports on the container, for example, a hypothetical "He
 
 ## Requirements
 
-Requirements are hard dependencies that must be satisfied by the deployment system before the deployment system attempts to start a service.
+Requirements are cloud infrastructure that needs to be created before a service is launched. The mechanism of creation is left to the deployment system. The `type` parameter on each requirement is customizable and maps to an implementation of how that requirement will be fulfilled (e.g. via Terraform).
+
+```yaml
+requirements:
+  - name: users
+    type: postgresql-v96
+    parameters:
+      iops: 100
+```
+
+| Field      | Type, Format |  Description                    | Default   |
+| ---------- | ------------ | ------------------------------- | --------- |
+| name       | string       | Name of the thing being created. Used to inject config into a container (e.g. ${NAME}_DB_USERNAME as an env var). | |
+| type       | string       | The type of thing to create. Totally user defined and implementation specific to the deployment system.  | |
+| parameters | map<string, string>  | developer configurable options (e.g. IOPS). | |
 
 ## Example Descriptor
 
+Below is an example descriptor based off this specification to give a bit of a "feel" for how this would actually look.
+
 ```yaml
+---
 # Draft 2017-03-02: Service Descriptor
 
----
 name: hello
 
 deployable:
@@ -152,12 +168,12 @@ network:
 requirements:
   - name: users
     type: postgresql-v96
-    params:
+    parameters:
       iops: 100
 
   - name: votes
     type: postgresql-v96
-    params:
+    parameters:
       iops: 50
       initial_storage_capacity: 300Gb
 
