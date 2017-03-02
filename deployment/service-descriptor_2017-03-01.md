@@ -13,7 +13,7 @@ This is a very rough English specification. It will eventually be turned into so
 
 ## Serialization Format
 
-A Datawirefile is stored and transmitted as a [YAML](http://www.yaml.org/) document.
+A descriptor is stored and transmitted as a [YAML](http://www.yaml.org/) document.
 
 **NOTE:** We're not wedded to YAML. It just happens to be easy to get started with. The only requirement is that any chosen format have a straightforward means to be converted to JSON for tooling purposes.
 
