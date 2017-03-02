@@ -115,3 +115,72 @@ A backend is the exposed ports on the container, for example, a hypothetical "He
 ## Requirements
 
 Requirements are hard dependencies that must be satisfied by the deployment system before the deployment system attempts to start a service.
+
+## Example Descriptor
+
+```yaml
+# Draft 2017-03-02: Service Descriptor
+
+---
+# Name of the Service deployed in the World
+name: hello
+
+# The Deployable artifact which in this hypothetical service descriptor is a Docker image.
+deployable:
+  type: docker
+  registry: docker.io
+  name: datawire/hello
+  resolver:
+    type: provided
+
+# Controls the mechanism for how an update is performed.
+update:
+  strategy: rolling
+  parameters: { }
+
+# Network configuration that the developer is allowed to define.
+network:
+  frontend:
+    type: external
+    ports:
+      - target: rest-api
+        port: 80
+
+  backends:
+    - name: rest-api
+      protocol: tcp
+      port: 5001
+    - name: admin-api
+      port: 5002
+
+# Requirements are hard dependencies that must be satisfied by the deployment system before the deployment system
+# attempts to start a container. Consider a system that needs TWO PostgreSQL 9.6 *database servers*. When Deployd
+# processes the descriptor the following things occur:
+#
+# requirements.each {
+#   if (requirement.type in World.ModuleRepository) {
+#     if exists(service.name, requirement.name) and no_diff(requirement.params, existing.params) {
+#       val exportedVariables = requirement.exports // these are injected into the kubernetes container (e.g. URL, port, username, password).
+#       satisfied()
+#     } else {
+#       createOrUpdateDependency()
+#     }
+#   }
+#   else {
+#     abort()
+#   }
+# }
+#
+requirements:
+  - name: users
+    type: postgresql-v96
+    params:
+      iops: 100
+
+  - name: votes
+    type: postgresql-v96
+    params:
+      iops: 50
+      initial_storage_capacity: 300Gb
+
+```
