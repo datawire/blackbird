@@ -1,0 +1,30 @@
+import os, sys, time
+from watchdog.observers import Observer
+from forge.tasks import sh, task, watch
+
+# need to actually copy everything at startup
+base = os.path.dirname(__file__)
+
+#with task.verbose(True):
+#    sh("docker", "build", ".", "-t", "react", cwd=base)
+#    sh.go("docker", "run", "--rm", "--name", "react", "-p", "3000:3000", "-it", "--entrypoint", "npm", "react",
+#          "start", output_buffer=0)
+
+paths = (os.path.join(base, "public"),
+         os.path.join(base, "src"))
+
+class Sync(object):
+
+    def on_modified(self, event):
+        path = event.src_path
+        if event.is_directory or "#" in path:
+            return
+
+        relpath = os.path.relpath(path, base)
+        with task.verbose(True):
+            sh("kubectl", "cp", path, "{0}:/app/{1}".format(forge.args[0], relpath))
+#            sh("docker", "cp", path, "{0}:/app/{1}".format("react", relpath))
+
+watch(paths, Sync())
+while True:
+    time.sleep(1.0)

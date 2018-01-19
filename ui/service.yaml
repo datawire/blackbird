@@ -1,0 +1,24 @@
+{% set sanitized_branch = (branch or "dev").replace('/', '-') %}
+{% set host_to_route = env.get('HOST_TO_ROUTE', 'dashboard.k736.net') %}
+
+name: ui
+namespace: datawire
+
+profiles:
+  stable:
+    endpoint: /
+    max_memory: 0.7G
+    max_cpu: 0.5
+  canary:
+    endpoint: /
+    weight: 10 # percentage of traffic to route to this class of deployment
+    max_memory: 0.7G
+    max_cpu: 0.5
+  default:
+    name: {{sanitized_branch}}
+    endpoint: /
+    max_memory: 0.7G
+    max_cpu: 0.5
+
+branches:
+  master: stable
