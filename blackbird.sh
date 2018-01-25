@@ -31,11 +31,11 @@ if [ -z "$HOST" ] ; then
   HOST="localhost"
 fi
 
-AMBASSADORURL="http://${HOST}:8080"
+AMBASSADORURL="http://${HOST}"
 
 if [ "$UNAME" = "Darwin" ] ; then
     open $AMBASSADORURL
-else [ "$UNAME" = "Linux" ] ; then
+else
     xdg-open $AMBASSADORURL
 fi
 
