@@ -10,3 +10,16 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+
+.welcome {
+    margin: 35px 0;
+}
+
+.welcome-text {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}

@@ -1,0 +1,5 @@
+.poller-content {
+    max-height: 150px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
