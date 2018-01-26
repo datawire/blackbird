@@ -15,37 +15,35 @@ const App = () =>
     <Grid columns={15}>
       <Grid.Row className="welcome">
         <Grid.Column width={6}>
-          <h1>Welcome!</h1>
+          <h1>Congratulations!</h1>
         </Grid.Column>
         <Grid.Column width={9}>
           <p className="welcome-text">
-            Are you tired of slow code/test/debug cycles on Kubernetes? Are you an application developer on
-            Kubernetes who just wants auto-reload to work again? Our open source tools are designed for developers
-            who are building cloud-native applications — but don’t want to compromise on their personal
-            productivity.
+            This Kubernetes cluster is successfully running the Blackbird demo application, which consists of several microservices. Take a tour of Blackbird below:
           </p>
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
         <Grid.Column width={6}>
-          <Poller endpoint="api"/>
+          <Poller endpoint="python-api"/>
           <Poller endpoint="java-spring-api"/>
-          <Poller endpoint="java-api"/>
         </Grid.Column>
         <Grid.Column width={9}>
           <Carousel>
             {/* Slide start */}
             <div>
               <div className="text-center">
-                <h3>Feature 1</h3>
-                <p>This is the best feature in the world</p>
+                <h3>Deploy your changes, quickly</h3>
               </div>
+              <p>
+              Blackbird integrates <code>Forge</code>, which makes it easy to deploy your service from source to production. You've already used Forge to deploy this application, which consists of multiple services. To make a change to your code, try the following:
+              </p>
               <ul>
-                <li>step 1</li>
-                <li>step 2</li>
-                <li>step 3</li>
+                <li>Open <code>blackbird/api/app.py</code> in your code editor.</li>
+                <li>Change the return value of the service to a different value.</li>
+                <li>Run <code>forge deploy</code> on the command line.</li>
+                <li>See how the code for the API service on the left changes.</li>
               </ul>
-              <img alt="Jetpack" style={{ width: 200, margin: '100px auto' }} src={jetpack} />
             </div>
             {/* Slide end */}
 
