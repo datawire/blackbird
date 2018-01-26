@@ -16,7 +16,6 @@ metadata:
       apiVersion: ambassador/v0
       kind: Mapping
       name: {{build.name}}-mapping
-      host: {{build.profile.host}}
       prefix: {{build.profile.endpoint}}
       service: {{build.name}}.{{service.namespace}}.svc.cluster.local
       {%- if "weight" in build.profile %}
