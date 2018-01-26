@@ -1,5 +1,4 @@
 {% set sanitized_branch = (branch or "dev").replace('/', '-') %}
-{% set host_to_route = env.get('HOST_TO_ROUTE', 'dashboard.k736.net') %}
 
 name: ui
 namespace: datawire
@@ -14,11 +13,13 @@ profiles:
     weight: 10 # percentage of traffic to route to this class of deployment
     max_memory: 0.7G
     max_cpu: 0.5
-  default:
+  default:  # development profile
     name: {{sanitized_branch}}
-    endpoint: /
+    endpoint: {{sanitized_branch}}
     max_memory: 0.7G
     max_cpu: 0.5
 
 branches:
   master: stable
+  dev/*: default
+  

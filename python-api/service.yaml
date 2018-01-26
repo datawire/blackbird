@@ -15,7 +15,7 @@ profiles:
     max_cpu: 0.1
   default:
     name: {{sanitized_branch}}
-    endpoint: /python-api
+    endpoint: /{{sanitized_branch}}/python-api
     max_memory: 0.1G
     max_cpu: 0.1
 
