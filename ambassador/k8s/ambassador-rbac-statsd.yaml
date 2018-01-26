@@ -6,12 +6,20 @@ metadata:
     service: ambassador-admin
   name: ambassador-admin
   namespace: {{service.namespace}}
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v0
+      kind: Mapping
+      name: diag-mapping
+      prefix: /ambassador/
+      service: ambassador-admin:8877
+      rewrite: /ambassador/v0/diag/
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
   - name: ambassador-admin
     port: 8877
-    targetPort: 8877
   selector:
     service: ambassador
 ---
@@ -70,7 +78,6 @@ spec:
       containers:
       - name: ambassador
         image: quay.io/datawire/ambassador:0.22.0
-        imagePullPolicy: Always
         resources:
           limits:
             cpu: 1
