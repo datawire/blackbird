@@ -1,0 +1,35 @@
+{% set sanitized_branch = (branch or "dev").replace('/', '-') %}
+
+name: java-spring-api
+namespace: datawire
+
+containers:
+  - dockerfile: Dockerfile
+    context: .
+    rebuild:
+      root: /srv
+      command: ./gradlew test build
+      sources:
+        - build.gradle
+        - settings.gradle
+        - src
+
+profiles:
+  stable:
+    endpoint: /java-spring-api
+    max_memory: 0.25G
+    max_cpu: 0.25
+  canary:
+    endpoint: /java-spring-api
+    weight: 50 # percentage of traffic to route to this class of deployment
+    max_memory: 0.25G
+    max_cpu: 0.25
+  default:
+    name: {{sanitized_branch}}
+    endpoint: /java-spring-api
+    max_memory: 0.25G
+    max_cpu: 0.1
+
+branches:
+  master: stable
+  dev/*: default
