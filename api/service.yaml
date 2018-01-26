@@ -1,23 +1,21 @@
 {% set sanitized_branch = (branch or "dev").replace('/', '-') %}
-{% set host_to_route = env.get('HOST_TO_ROUTE', 'dashboard.k736.net') %}
-{% set apihost_scheme = env.get('APIHOST_SCHEME', 'https') %}
 
-name: api
+name: python-api
 namespace: datawire
 
 profiles:
   stable:
-    endpoint: /api
-    max_memory: 0.25G
-    max_cpu: 0.25
+    endpoint: /python-api
+    max_memory: 0.1G
+    max_cpu: 0.1
   canary:
-    endpoint: /api
+    endpoint: /python-api
     weight: 50 # percentage of traffic to route to this class of deployment
-    max_memory: 0.25G
-    max_cpu: 0.25
+    max_memory: 0.1G
+    max_cpu: 0.1
   default:
     name: {{sanitized_branch}}
-    endpoint: /api
+    endpoint: /python-api
     max_memory: 0.1G
     max_cpu: 0.1
 

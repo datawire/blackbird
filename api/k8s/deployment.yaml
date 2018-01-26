@@ -52,7 +52,7 @@ spec:
         - name: BUILD_PROFILE
           value: {{build.profile.name}}
         image: {{build.images["Dockerfile"]}}
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         resources:
           requests:
             memory: 0.1G
