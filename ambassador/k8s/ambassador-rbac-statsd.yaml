@@ -1,5 +1,10 @@
 ---
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{service.namespace}}
+---
+apiVersion: v1
 kind: Service
 metadata:
   labels:
@@ -105,3 +110,18 @@ spec:
       - name: statsd-sink
         image: datawire/prom-statsd-exporter:0.6.0
       restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: ambassador
+  name: ambassador
+  namespace: {{service.namespace}}
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+    selector:
+      service: ambassador
