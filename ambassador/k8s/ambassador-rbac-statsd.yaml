@@ -65,7 +65,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: ambassador
-  namespace: default
+  namespace: {{service.namespace}}
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -121,7 +121,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 80
-      targetPort: 80
-    selector:
-      service: ambassador
+  - port: 80
+    targetPort: 80
+  selector:
+    service: ambassador
