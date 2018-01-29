@@ -26,9 +26,9 @@ profiles:
     max_cpu: 0.25
   default:
     name: {{sanitized_branch}}
-    endpoint: /java-spring-api
+    endpoint: /{{sanitized_branch}}/java-spring-api
     max_memory: 0.25G
-    max_cpu: 0.1
+    max_cpu: 0.2
 
 branches:
   master: stable
