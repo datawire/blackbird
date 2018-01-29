@@ -43,13 +43,18 @@ const App = () =>
                 <p><code>git checkout -b dev/my-first-change</code></p>
                 </li>
                 <li>Make a change to your microservice.
-                <ul>
-                <li>If you are using Python, edit `python-api/App.py`. Change it to return * * instead of ( ).
-                <li>if you are using Java, do xxx.
-                </ul>
+                  <ul>
+                  <li>If you are using Python, edit `python-api/App.py`. Change it to return * * instead of ( ).</li>
+                  <li>if you are using Java, do xxx.</li>
+                  </ul>
                 </li>
                 <li>Run <code>forge deploy</code> on the command line. This will automatically deploy your code change to a development environment. Forge automatically detects your branch name, and will deploy your code change (and its dependencies) to a preview URL.</li>
                 <li>Locate the <code>my-first-change</code> on the developer console, and click on the link to see your changes in the development environment.</li>
+              </ol>
+              <p>Further Reading</p>
+              <ul>
+              <li>Link 1</li>
+              <li>Link 2</li>
               </ul>
             </div>
             {/* Slide end */}
