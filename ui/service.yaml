@@ -22,4 +22,3 @@ profiles:
 branches:
   master: stable
   dev/*: default
-  
