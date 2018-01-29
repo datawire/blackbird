@@ -33,16 +33,23 @@ const App = () =>
             {/* Slide start */}
             <div>
               <div className="text-center">
-                <h3>Deploy your changes, quickly</h3>
+                <h3>Make a code change</h3>
               </div>
               <p>
-              Blackbird integrates <code>Forge</code>, which makes it easy to deploy your service from source to production. You've already used Forge to deploy this application, which consists of multiple services. To make a change to your code, try the following:
+              Blackbird integrates <code>Forge</code>, which makes it easy to deploy your service from source to Kubernetes. You've already used Forge to deploy this application, which consists of multiple services. In this tutorial, we'll make a code change to a single service, and push that change to development view.
               </p>
-              <ul>
-                <li>Open <code>blackbird/api/app.py</code> in your code editor.</li>
-                <li>Change the return value of the service to a different value.</li>
-                <li>Run <code>forge deploy</code> on the command line.</li>
-                <li>See how the code for the API service on the left changes.</li>
+              <ol>
+                <li>Create a Git branch with the <code>dev</code> prefix:
+                <p><code>git checkout -b dev/my-first-change</code></p>
+                </li>
+                <li>Make a change to your microservice.
+                <ul>
+                <li>If you are using Python, edit `python-api/App.py`. Change it to return * * instead of ( ).
+                <li>if you are using Java, do xxx.
+                </ul>
+                </li>
+                <li>Run <code>forge deploy</code> on the command line. This will automatically deploy your code change to a development environment. Forge automatically detects your branch name, and will deploy your code change (and its dependencies) to a preview URL.</li>
+                <li>Locate the <code>my-first-change</code> on the developer console, and click on the link to see your changes in the development environment.</li>
               </ul>
             </div>
             {/* Slide end */}
