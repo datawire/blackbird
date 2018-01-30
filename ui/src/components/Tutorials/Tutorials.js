@@ -57,7 +57,7 @@ class Tutorials extends Component {
                   </ul>
                 </li>
                 <li>
-                  Run <code>forge deploy</code> on the command line. Forge will detect that these changes were made on a development branch (hence the <code>dev</code>) prefix, and deploy the changes to your development preview environment.
+                  Run <code>forge deploy</code> on the command line. Forge will detect that these changes were made on a development branch (hence the <code>dev</code>) prefix, and deploy the changes to your development preview environment. Under the hood, Forge uses the <code>Dockerfile</code>, a templated Kubernetes manifest, and metadata in a <code>service.yaml</code> file to build and deploy your service into Kubernetes.
                 </li>
                 <li>
                   View the changes by clicking on the appropriate branch name in the developer console.
@@ -71,9 +71,11 @@ class Tutorials extends Component {
           }
           { currentIdx === 1 &&
             <div className="tutorial">
+              We've made a change on a development branch, and now it's time to roll it out to users. We can do this with a canary test.
               <ol>
                 <li>
-                  Step 4
+                  We've defined a <i>profile</i> for canary testing that specifies that 50% of the traffic will be routed to a canary service. On your development branch, let's use this profile to deploy the same code as a canary.
+                  <code>forge --profile canary deploy</code>
                 </li>
                 <li>
                   Step 5
