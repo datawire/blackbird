@@ -1,2 +1,4 @@
 name: ambassador
 namespace: datawire
+
+ambassador_version: __AMBASSADOR_VERSION__
