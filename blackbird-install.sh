@@ -4,12 +4,7 @@ set -u
 
 BLACKBIRD_REPO="https://github.com/datawire/blackbird.git"
 
-main() {
-    need_cmd curl
-    need_cmd kubectl
-    need_cmd docker
-    need_cmd git
-    
+main() {    
     local _ansi_escapes_are_valid=false
     if [ -t 2 ]; then
         if [ "${TERM+set}" = 'set' ]; then
@@ -20,9 +15,16 @@ main() {
             esac
         fi
     fi
+
+    need_cmd curl
+    need_cmd kubectl
+    need_cmd docker
+    need_cmd git
+    
+    chk_kubernetes_version 7 7
     
     local _install_dir=~/blackbird
-    
+        
     # --------------------------------------------------------------------------
     # Local installation
     # --------------------------------------------------------------------------    
@@ -61,8 +63,27 @@ main() {
     # kubernetes cluster installation
     # --------------------------------------------------------------------------
 
-
+    echo ""
     say 'Please run `forge setup` and `forge deploy`'
+}
+
+# Only bothering to check the minor version of Kubernetes. All bets are off if the major
+# version increases.
+chk_kubernetes_version() {
+    local _min_allowed_client_version=$1
+    local _min_allowed_server_version=$2
+
+    local _version_json=$(ensure kubectl version -o json)
+    local _client_minor=$(ensure echo $_version_json | ensure python -c 'import json,sys; obj=json.load(sys.stdin); print(obj["clientVersion"]["minor"]);')
+    local _server_minor=$(ensure echo $_version_json | ensure python -c 'import json,sys; obj=json.load(sys.stdin); print(obj["serverVersion"]["minor"]);')   
+    
+    if [ "$_client_minor" -lt "$_min_allowed_client_version" ]; then
+        err "Your kubectl version is too outdated. You need at least 1.$_min_allowed_client_version. Please upgrade."
+    fi
+    
+    if [ "$_server_minor" -lt "$_min_allowed_server_version" ]; then
+        err "Your Kubernetes cluster version is too outdated. Need at least 1.$_min_allowed_server_version. Please upgrade."
+    fi
 }
 
 say() {
@@ -74,7 +95,7 @@ say_info() {
     local _msg=$2
 
     if $_ansi_escapes_are_valid; then
-        printf "\e[34;1minfo:\e[0m $_msg\n" 1>&2
+        printf "\e[31minfo:\e[0m $_msg\n" 1>&2
     else
         printf '%s\n' "info: $_msg" 1>&2
     fi
