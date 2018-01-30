@@ -4,21 +4,6 @@ set -u
 
 BLACKBIRD_REPO="https://github.com/datawire/blackbird.git"
 
-usage() {
-    cat 1>&2 <<EOF
-blackbird-install 0.1.0
-The installer for blackbird
-
-USAGE:
-    blackbird-install [FLAGS] [OPTIONS]
-
-FLAGS:
-    -h, --help              Prints help information
-    -V, --version           Prints version information
-
-EOF
-}
-
 main() {
     need_cmd curl
     need_cmd kubectl
@@ -36,27 +21,6 @@ main() {
         fi
     fi
     
-    local need_tty=yes
-    for arg in "$@"; do
-        case "$arg" in
-            -h|--help)
-                usage
-                exit 0
-                ;;
-            -y)
-                # user wants to skip the prompt -- we don't need /dev/tty
-                need_tty=no
-                ;;
-            --cloud)
-                if is_value_arg "$_arg" "prefix"; then
-                    _prefix="$(get_value_arg "$_arg")"
-                fi
-                ;;
-            *)
-                ;;
-        esac
-    done    
-    
     local _install_dir=~/blackbird
     
     # --------------------------------------------------------------------------
@@ -68,6 +32,7 @@ main() {
     #
     say_info $_ansi_escapes_are_valid "Cloning Blackbird repository"
     ensure git clone --quiet $BLACKBIRD_REPO $_install_dir
+    ensure cd $_install_dir
     
     #
     # Forge Install
@@ -90,8 +55,8 @@ main() {
    
     say_info $_ansi_escapes_are_valid "Configuring Blackbird to use the latest Ambassador"        
     local _ambassador_version="$(curl --silent https://s3.amazonaws.com/datawire-static-files/ambassador/stable.txt)"
-   
-    ensure cd $_install_dir 
+    ensure sed -i "s|__AMBASSADOR_VERSION__|$_ambassador_version|g" ambassador/service.yaml
+    
     # --------------------------------------------------------------------------
     # kubernetes cluster installation
     # --------------------------------------------------------------------------
@@ -109,7 +74,29 @@ say_info() {
     local _msg=$2
 
     if $_ansi_escapes_are_valid; then
-        printf "\33[1minfo:\33[0m $_msg\n" 1>&2
+        printf "\e[33;1minfo:\e[0m $_msg\n" 1>&2
+    else
+        printf '%s\n' "info: $_msg" 1>&2
+    fi
+}
+
+say_warn() {
+    local _ansi_escapes_are_valid=$1
+    local _msg=$2
+
+    if $_ansi_escapes_are_valid; then
+        printf "\e[33;1mwarn:\e[0m $_msg\n" 1>&2
+    else
+        printf '%s\n' "info: $_msg" 1>&2
+    fi
+}
+
+say_err() {
+    local _ansi_escapes_are_valid=$1
+    local _msg=$2
+
+    if $_ansi_escapes_are_valid; then
+        printf "\e[31;1merror:\e[0m $_msg\n" 1>&2
     else
         printf '%s\n' "info: $_msg" 1>&2
     fi
