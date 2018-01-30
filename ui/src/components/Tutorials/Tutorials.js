@@ -25,24 +25,48 @@ class Tutorials extends Component {
       <p>These tutorials will help you get the most out of Datawire applications.</p>
       <div className="tutorial-content">
         <ul className="options">
-          <li onClick={() => this.changeTutorial(0)}>Code Faster</li>
-          <li onClick={() => this.changeTutorial(1)}>Monitoring</li>
-          <li onClick={() => this.changeTutorial(2)}>Canary</li>
+          <li onClick={() => this.changeTutorial(0)}>Make a code change. Blackbird makes it easy for developers to quickly code and test changes in Kubernetes.</li>
+          <li onClick={() => this.changeTutorial(1)}>Canary test your change. Once you've tested your code change in dev, it's time to deploy as a canary. Blackbird makes this easy.</li>
+          <li onClick={() => this.changeTutorial(2)}>Code locally. While Blackbird makes it easy to quickly make changes, sometimes you want real-time feedback. Telepresence lets you code locally against a remote Kubernetes cluster.</li>
         </ul>
         <div className="content">
           { currentIdx === 0 &&
             <div className="tutorial">
+             <p>
+             Blackbird integrates <a href="https://forge.sh"><code>Forge</code></a> to make it easy to deploy your service from source to Kubernetes. You've already used Forge to deploy this application, which consists of multiple services. In this tutorial, we'll make a code change to a single service, and push that change to development view.
+             </p>
               <ol>
                 <li>
-                  Step 1
+                  Create a Git branch with a prefix of <code>dev</code>: <p><code>git checkout -b dev/my-first-change</code></p>
                 </li>
                 <li>
-                  Step 2
+                  Make a change to your microservice.
+                  <ul>
+                   <li>If you prefer editing Python:
+                     <ul>
+                     <li>Open <code>python-api/App.py</code>.</li>
+                     <li>Uncomment the line <code>environment="TEST"</code>.</li>
+                     </ul>
+                   </li>
+                   <li>If you prefer editing Java:
+                     <ul>
+                     <li>Open <code>HelloController.java</code> in the <code>java-spring-api</code> service.</li>
+                     <li>Uncomment the line <code>environment="TEST"</code>.</li>
+                     </ul>
+                    </li>
+                  </ul>
                 </li>
                 <li>
-                  Step 3
+                  Run <code>forge deploy</code> on the command line. Forge will detect that these changes were made on a development branch (hence the <code>dev</code>) prefix, and deploy the changes to your development preview environment.
+                </li>
+                <li>
+                  View the changes by clicking on the appropriate branch name in the developer console.
                 </li>
               </ol>
+              <p>Further reading</p>
+              <ul>
+              <li><a href="http://www.datawire.io/faster/dev-workflow-intro/">A development workflow for Kubernetes services</a></li>
+              </ul>
             </div>
           }
           { currentIdx === 1 &&
