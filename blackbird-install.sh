@@ -74,7 +74,7 @@ say_info() {
     local _msg=$2
 
     if $_ansi_escapes_are_valid; then
-        printf "\e[33;1minfo:\e[0m $_msg\n" 1>&2
+        printf "\e[34;1minfo:\e[0m $_msg\n" 1>&2
     else
         printf '%s\n' "info: $_msg" 1>&2
     fi
