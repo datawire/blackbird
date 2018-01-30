@@ -19,7 +19,21 @@
 .welcome-text {
     text-align: left;
 }
-
+.text-left {
+    text-align: left;
+}
 .text-center {
     text-align: center;
+}
+
+.tour-button {
+    background: #62c2d7;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: inline-block;
+    padding: 13px 40px;
+    min-width: 250px;
+    float: right;
 }

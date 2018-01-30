@@ -68,7 +68,7 @@ class Poller extends Component {
     var canary = this.latency(this.state.responses, "canary");
 
     return (
-      <Card centered>
+      <Card>
         <Card.Content>{this.props.endpoint}</Card.Content>
         <Card.Content className="poller-content">{items}</Card.Content>
         <Card.Content extra>latency: {stable}, {canary}</Card.Content>
