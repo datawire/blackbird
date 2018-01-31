@@ -54,7 +54,35 @@ main() {
     ensure chmod +x /usr/local/bin/forge
    
     say_info $_ansi_escapes_are_valid "Installing Telepresence"   
-   
+
+    # Detect if macOS, Ubuntu or Fedora
+    local _platform="$(uname | tr "[:upper:]" "[:lower:]")"
+    if [[ "$_platform" == "linux" ]]; then
+      say_info $_ansi_escapes_are_valid "Detected Linux"
+      case $(lsb_release -d) in
+        *Ubuntu*)
+          say_info $_ansi_escapes_are_valid "Detected Ubuntu"
+          ensure curl -s https://packagecloud.io/install/repositories/datawireio/telepresence/script.deb.sh | ensure sudo -s bash
+          ensure apt install --no-install-recommends telepresence
+          ;;
+        *Fedora*)
+          say_info $_ansi_escapes_are_valid "Detected Fedora"
+          ensure curl -s https://packagecloud.io/install/repositories/datawireio/telepresence/script.rpm.sh | ensure sudo -s bash
+          ensure sudo -s dnf install telepresence
+          ;;
+        *)
+          err "Telepresence not supported on this OS!"
+      esac
+    elif [[ "$_platform" == "darwin" ]]; then
+      say_info $_ansi_escapes_are_valid "Detected macOS"
+      need_cmd brew
+      ensure brew cask install osxfuse
+      ensure brew install socat datawire/blackbird/telepresence
+    else
+      err "Operating System not supported. Only macOS and Linux are supported!"
+    fi
+
+
     say_info $_ansi_escapes_are_valid "Configuring Blackbird to use the latest Ambassador"        
     local _ambassador_version="$(curl --silent https://s3.amazonaws.com/datawire-static-files/ambassador/stable.txt)"
     ensure sed -i "s|__AMBASSADOR_VERSION__|$_ambassador_version|g" ambassador/service.yaml
@@ -62,6 +90,25 @@ main() {
     # --------------------------------------------------------------------------
     # kubernetes cluster installation
     # --------------------------------------------------------------------------
+
+    PS3="Are you using a Google Kubernetes Engine (GKE) cluster? "
+    select _yn in yes no
+    do    
+        case $_yn in
+          yes)
+              need_cmd gcloud
+              say_info $_ansi_escapes_are_valid "Creating RBAC cluster admin role binding"
+              ensure kubectl create clusterrolebinding \
+                my-cluster-admin-binding \
+                --clusterrole=cluster-admin \
+                --user=$(ensure gcloud info --format="value(config.account)")             
+              break
+              ;;
+            *)
+              break
+              ;;
+        esac
+    done
 
     echo ""
     say 'Please run `forge setup` and `forge deploy`'
@@ -74,8 +121,8 @@ chk_kubernetes_version() {
     local _min_allowed_server_version=$2
 
     local _version_json=$(ensure kubectl version -o json)
-    local _client_minor=$(ensure echo $_version_json | ensure python -c 'import json,sys; obj=json.load(sys.stdin); print(obj["clientVersion"]["minor"]);')
-    local _server_minor=$(ensure echo $_version_json | ensure python -c 'import json,sys; obj=json.load(sys.stdin); print(obj["serverVersion"]["minor"]);')   
+    local _client_minor=$(ensure echo $_version_json | ensure python -c 'import json,sys; obj=json.load(sys.stdin); print(obj["clientVersion"]["minor"]);' | ensure sed 's/[^0-9]*//g')
+    local _server_minor=$(ensure echo $_version_json | ensure python -c 'import json,sys; obj=json.load(sys.stdin); print(obj["serverVersion"]["minor"]);' | ensure sed 's/[^0-9]*//g')   
     
     if [ "$_client_minor" -lt "$_min_allowed_client_version" ]; then
         err "Your kubectl version is too outdated. You need at least 1.$_min_allowed_client_version. Please upgrade."
