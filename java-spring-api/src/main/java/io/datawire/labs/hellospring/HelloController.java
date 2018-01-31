@@ -18,8 +18,8 @@ public class HelloController {
                                       TimeUnit.MILLISECONDS.toMinutes(millis),
                                       TimeUnit.MILLISECONDS.toSeconds(millis) -
                                       TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-        String environment = System.getenv("BUILD_PROFILE")
-        // environment = "TEST"
+        String environment = System.getenv("BUILD_PROFILE");
+        // environment = "TEST";
         return String.format("%s (%s)", uptime, environment);
     }
 
