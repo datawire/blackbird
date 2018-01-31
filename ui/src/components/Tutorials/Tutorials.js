@@ -85,30 +85,40 @@ class Tutorials extends Component {
                   Ambassador includes integrated diagnostics to make it easy to troubleshoot routing configuration. Click on the Diagnostics button to get a real-time view of the currently configured routes in Ambassador.
                 </li>
                 <li>
-                  To fully deploy your changes into production, switch to the master branch, merge your changes, and redeploy:
+                  To fully deploy your changes into production, switch to the master branch, merge your changes, and redeploy.
                   <p>
-                  <code>git checkout master
-                  git merge dev/my-first-change
-                  forge deploy
-                  </code>
-                  <p>
-                </li>
-              </ol>
+                  <pre>{`git checkout master
+git merge dev/my-first-change
+forge deploy
+                  `}</pre>
+                  </p>
+                  </li>
+                </ol>
+                <p>Further reading</p>
+                <ul>
+                <li><a href="https://www.datawire.io/faster/canary-workflow/">Canary deployments, A/B testing, and microservices with Ambassador</a></li>
+                </ul>
             </div>
           }
           { currentIdx === 2 &&
             <div className="tutorial">
+              <p>In this tutorial, we'll show you can code in real time against the cluster using <a href="https://www.telepresence.io">Telepresence</a>. We'll also demonstrate the use of a fully containerized development environment. By containerizing our development environment, we can insure identical runtime environments between development and production. Moreover, any developer who needs to work on the containerized service can use the exact same toolchain as every other developer.</p>
               <ol>
                 <li>
-                  Step 7
+                  We will use the <code>python-api</code> service in this tutorial. First, we will build a local Docker container for development.
+                  <p><code>cd python-api; docker build . -t<br /> python-api-dev</code></p>
                 </li>
                 <li>
-                  Step 8
+                  We will use Telepresence to 1) start your service in the local container and 2) route requests to this service from your remote Kubernetes cluster to your local container. We will also use a volume mount to mount our local filesystem into the Docker container.
+                  <p><code>telepresence --namespace datawire --swap-deployment python-api-stable --docker-run --rm -i -t -v $(pwd)/service python-api-dev</code></p>
                 </li>
                 <li>
-                  Step 9
+                  Wait for Telepresence to start up, and enter your password when prompted. Once Telepresence has started, open <code>python-api/app.py</code> in your favorite code editor. Edit the code, save your changes, and see them reflected immediately in the dashboard.
                 </li>
               </ol>
+              <ul>
+              <li><a href="https://www.telepresence.io/tutorials/docker">Fast development workflow with Docker and Kubernetes</a></li>
+              </ul>
             </div>
           }
         </div>
