@@ -33,7 +33,7 @@ class Tutorials extends Component {
           { currentIdx === 0 &&
             <div className="tutorial">
              <p>
-             Blackbird integrates <a href="https://forge.sh"><code>Forge</code></a> to make it easy to deploy your service from source to Kubernetes. You've already used Forge to deploy this application, which consists of multiple services. In this tutorial, we'll make a code change to a single service, and push that change to development view.
+             Blackbird integrates <a href="https://forge.sh"><code>Forge</code></a> to make it easy to deploy your service from source to Kubernetes. You've already used Forge to deploy this application, which consists of multiple services. In this tutorial, we'll make a code change to a single service, and push that change to a development environment.
              </p>
               <ol>
                 <li>
@@ -65,7 +65,8 @@ class Tutorials extends Component {
               </ol>
               <p>Further reading</p>
               <ul>
-              <li><a href="http://www.datawire.io/faster/dev-workflow-intro/">A development workflow for Kubernetes services</a></li>
+              <li><a href="https://www.datawire.io/faster/dev-workflow-intro/">A development workflow for Kubernetes services</a></li>
+              <li><a href="https://www.datawire.io/faster/shared-dev/">Shared development models and multi-service applications</a></li>
               </ul>
             </div>
           }
@@ -75,7 +76,7 @@ class Tutorials extends Component {
               <ol>
                 <li>
                   We've defined a <i>profile</i> for canary testing that specifies that 50% of the traffic will be routed to a canary service. On your development branch, let's use this profile to deploy the same code as a canary.
-                  <code>forge --profile canary deploy</code>
+                  <p><code>forge --profile canary deploy</code></p>
                 </li>
                 <li>
                   Step 5
