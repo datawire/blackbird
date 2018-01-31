@@ -4,7 +4,7 @@ set -u
 
 BLACKBIRD_REPO="https://github.com/datawire/blackbird.git"
 
-main() {    
+main() {
     local _ansi_escapes_are_valid=false
     if [ -t 2 ]; then
         if [ "${TERM+set}" = 'set' ]; then
@@ -20,40 +20,40 @@ main() {
     need_cmd kubectl
     need_cmd docker
     need_cmd git
-    
+
     chk_kubernetes_version 7 7
-    
-    local _install_dir=~/blackbird
-        
+
+    local _install_dir=$(pwd)/blackbird
+
     # --------------------------------------------------------------------------
     # Local installation
-    # --------------------------------------------------------------------------    
-    
+    # --------------------------------------------------------------------------
+
     #
     # Blackbird Repo
     #
     say_info $_ansi_escapes_are_valid "Cloning Blackbird repository"
     ensure git clone --quiet $BLACKBIRD_REPO $_install_dir
     ensure cd $_install_dir
-    
+
     #
     # Forge Install
     #
-    say_info $_ansi_escapes_are_valid "Downloading Forge"    
+    say_info $_ansi_escapes_are_valid "Downloading Forge"
     local _forge_version="$(curl --silent https://s3.amazonaws.com/datawire-static-files/forge/latest.url?x-download=datawire)"
     ensure curl \
         --location \
         --output /tmp/forge \
         --silent \
-        https://s3.amazonaws.com/datawire-static-files/forge/$_forge_version/forge?x-download=datawire
+        https://s3.amazonaws.com/datawire-static-files/forge/$_forge_version/forge?x-download=blackbird
 
-    say_info $_ansi_escapes_are_valid "Installing Forge into /usr/local/bin (this may require root)"        
+    say_info $_ansi_escapes_are_valid "Installing Forge into /usr/local/bin (this may require root)"
     ensure sudo -s mkdir -p /usr/local/bin
     ensure sudo -s chmod 777 /usr/local/bin
     ensure sudo -s mv /tmp/forge /usr/local/bin
     ensure chmod +x /usr/local/bin/forge
-   
-    say_info $_ansi_escapes_are_valid "Installing Telepresence"   
+
+    say_info $_ansi_escapes_are_valid "Installing Telepresence"
 
     # Detect if macOS, Ubuntu or Fedora
     local _platform="$(uname | tr "[:upper:]" "[:lower:]")"
@@ -83,17 +83,17 @@ main() {
     fi
 
 
-    say_info $_ansi_escapes_are_valid "Configuring Blackbird to use the latest Ambassador"        
+    say_info $_ansi_escapes_are_valid "Configuring Blackbird to use the latest Ambassador"
     local _ambassador_version="$(curl --silent https://s3.amazonaws.com/datawire-static-files/ambassador/stable.txt)"
     ensure sed -i "s|__AMBASSADOR_VERSION__|$_ambassador_version|g" ambassador/service.yaml
-    
+
     # --------------------------------------------------------------------------
     # kubernetes cluster installation
     # --------------------------------------------------------------------------
 
     PS3="Are you using a Google Kubernetes Engine (GKE) cluster? "
     select _yn in yes no
-    do    
+    do
         case $_yn in
           yes)
               need_cmd gcloud
@@ -101,7 +101,7 @@ main() {
               ensure kubectl create clusterrolebinding \
                 my-cluster-admin-binding \
                 --clusterrole=cluster-admin \
-                --user=$(ensure gcloud info --format="value(config.account)")             
+                --user=$(ensure gcloud info --format="value(config.account)")
               break
               ;;
             *)
@@ -120,14 +120,14 @@ chk_kubernetes_version() {
     local _min_allowed_client_version=$1
     local _min_allowed_server_version=$2
 
-    local _version_json=$(ensure kubectl version -o json)
+    local _version_json=$(ensure kubectl version --output json)
     local _client_minor=$(ensure echo $_version_json | ensure python -c 'import json,sys; obj=json.load(sys.stdin); print(obj["clientVersion"]["minor"]);' | ensure sed 's/[^0-9]*//g')
-    local _server_minor=$(ensure echo $_version_json | ensure python -c 'import json,sys; obj=json.load(sys.stdin); print(obj["serverVersion"]["minor"]);' | ensure sed 's/[^0-9]*//g')   
-    
+    local _server_minor=$(ensure echo $_version_json | ensure python -c 'import json,sys; obj=json.load(sys.stdin); print(obj["serverVersion"]["minor"]);' | ensure sed 's/[^0-9]*//g')
+
     if [ "$_client_minor" -lt "$_min_allowed_client_version" ]; then
         err "Your kubectl version is too outdated. You need at least 1.$_min_allowed_client_version. Please upgrade."
     fi
-    
+
     if [ "$_server_minor" -lt "$_min_allowed_server_version" ]; then
         err "Your Kubernetes cluster version is too outdated. Need at least 1.$_min_allowed_server_version. Please upgrade."
     fi
