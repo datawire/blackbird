@@ -17,7 +17,7 @@ const App = () =>
             <h1 className="text-left">Blackbird Demo App</h1>
           </Grid.Column>
           <Grid.Column width={9}>
-            <a href="#" className="tour-button">Tour</a>
+            <a href="/ambassador/" className="tour-button">Diagnostics</a>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>

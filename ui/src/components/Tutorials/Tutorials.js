@@ -57,10 +57,10 @@ class Tutorials extends Component {
                   </ul>
                 </li>
                 <li>
-                  Run <code>forge deploy</code> on the command line. Forge will detect that these changes were made on a development branch (hence the <code>dev</code>) prefix, and deploy the changes to your development preview environment. Under the hood, Forge uses the <code>Dockerfile</code>, a templated Kubernetes manifest, and metadata in a <code>service.yaml</code> file to build and deploy your service into Kubernetes.
+                  Run <code>forge deploy</code> from your terminal in the <code>blackbird</code> top level directory. Forge will recursively deploy any services at the current working directory and below. Forge will only deploy services that have changed on disk. In this case, Forge detects that changes were made on a development branch, and deploy all these changes to a development environment. Under the hood, Forge uses the <code>Dockerfile</code>, a templated Kubernetes manifest, and metadata in a <code>service.yaml</code> file to build and deploy your service into Kubernetes.
                 </li>
                 <li>
-                  View the changes by clicking on the appropriate branch name in the developer console.
+                  View the changes by clicking on the appropriate branch name (e.g., <code>dev/my-first-change</code>) in the developer console. You should see that the microservice you have changed now displays the word TEST.
                 </li>
               </ol>
               <p>Further reading</p>
@@ -79,10 +79,19 @@ class Tutorials extends Component {
                   <p><code>forge --profile canary deploy</code></p>
                 </li>
                 <li>
-                  Step 5
+                  If you go back to the production view, you'll see that the modified microservice will now switch between the environment (e.g., stable) and TEST 50% of the time. Ambassador is using Envoy's weighted round robin algorithm to route traffic between the two services.
                 </li>
                 <li>
-                  Step 6
+                  Ambassador includes integrated diagnostics to make it easy to troubleshoot routing configuration. Click on the Diagnostics button to get a real-time view of the currently configured routes in Ambassador.
+                </li>
+                <li>
+                  To fully deploy your changes into production, switch to the master branch, merge your changes, and redeploy:
+                  <p>
+                  <code>git checkout master
+                  git merge dev/my-first-change
+                  forge deploy
+                  </code>
+                  <p>
                 </li>
               </ol>
             </div>
