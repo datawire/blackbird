@@ -22,27 +22,27 @@ class Tutorials extends Component {
     return (
     <div className="tutorials text-left">
       <div className="tutorial-header">
-        <h2>Get Started</h2>
-        <p>These tutorials will help you get the most out of Datawire applications.</p>
+        <h2>Datawire Reference Architecture</h2>
+        <p>The Datawire Reference Architecture illustrates some of the key aspects of a productive development workflow. The architecture is built using the <a href="https://www.getambassador.io">Ambassador API Gateway</a>, the <a href="https://forge.sh">Forge deployment system</a>, and <a href="https://www.telepresence.io">Telepresence</a>. </p>
       </div>
       <div className="tutorial-content">
         <ul className="options">
           <li className={ currentIdx === 0 ? 'active' : '' } onClick={() => this.changeTutorial(0)}>
             <strong>Make a code change.</strong>
-            <span>Blackbird makes it easy for developers to quickly code and test changes in Kubernetes.</span>
+            <span>Developers need to be able to quickly code and test a change in Kubernetes -- without impacting production.</span>
           </li>
           <li className={ currentIdx === 1 ? 'active' : '' } onClick={() => this.changeTutorial(1)}>
             <strong>Canary test your change.</strong>
-            <span>Once you've tested your code change in dev, it's time to deploy as a canary. Blackbird makes this easy.</span></li>
+            <span>With a distributed application, testing with real-world traffic via a canary test is critical.</span></li>
           <li className={ currentIdx === 2 ? 'active' : '' } onClick={() => this.changeTutorial(2)}>
             <strong>Code locally.</strong>
-            <span>While Blackbird makes it easy to quickly make changes, sometimes you want real-time feedback. Telepresence lets you code locally against a remote Kubernetes cluster.</span></li>
+            <span>Local development gives developers real-time feedback and lets them use their own tools. This will show you how you can configure your workflow to support local development.</span></li>
         </ul>
         <div className="content">
           { currentIdx === 0 &&
             <div className="tutorial">
              <p>
-             Blackbird integrates <a href="https://forge.sh"><code>Forge</code></a> to make it easy to deploy your service from source to Kubernetes. You've already used Forge to deploy this application, which consists of multiple services. In this tutorial, we'll make a code change to a single service, and push that change to a development environment.
+             The reference architecture integrates <a href="https://forge.sh"><code>Forge</code></a> to make it easy to deploy your service from source to Kubernetes. You've already used Forge to deploy this application, which consists of multiple services. In this walk through, we'll make a code change to a single service, and push that change to a development environment.
              </p>
               <ol>
                 <li>
@@ -104,16 +104,19 @@ forge deploy
                 <p>Further reading</p>
                 <ul>
                 <li><a href="https://www.datawire.io/faster/canary-workflow/">Canary deployments, A/B testing, and microservices with Ambassador</a></li>
+                <li><a href="https://www.getambassador.io">Ambassador API Gateway</a></li>
                 </ul>
             </div>
           }
           { currentIdx === 2 &&
             <div className="tutorial">
-              <p>In this tutorial, we'll show you can code in real time against the cluster using <a href="https://www.telepresence.io">Telepresence</a>. We'll also demonstrate the use of a fully containerized development environment. By containerizing our development environment, we can insure identical runtime environments between development and production. Moreover, any developer who needs to work on the containerized service can use the exact same toolchain as every other developer.</p>
+              <p>In this walkthrough, we'll show you can code in real time against the cluster using <a href="https://www.telepresence.io">Telepresence</a>. We'll also demonstrate the use of a fully containerized development environment. By containerizing our development environment, we can insure identical runtime environments between development and production. Moreover, any developer who needs to work on the containerized service can use the exact same toolchain as every other developer.</p>
               <ol>
                 <li>
                   We will use the <code>python-api</code> service in this tutorial. First, we will build a local Docker container for development.
-                  <p><code>cd python-api; docker build . -t<br /> python-api-dev</code></p>
+                  <p><pre>{`cd python-api
+docker build . -t python-api-dev
+                  `}</pre></p>
                 </li>
                 <li>
                   We will use Telepresence to 1) start your service in the local container and 2) route requests to this service from your remote Kubernetes cluster to your local container. We will also use a volume mount to mount our local filesystem into the Docker container.
@@ -123,8 +126,10 @@ forge deploy
                   Wait for Telepresence to start up, and enter your password when prompted. Once Telepresence has started, open <code>python-api/app.py</code> in your favorite code editor. Edit the code, save your changes, and see them reflected immediately in the dashboard.
                 </li>
               </ol>
+              <p>Further reading</p>
               <ul>
               <li><a href="https://www.telepresence.io/tutorials/docker">Fast development workflow with Docker and Kubernetes</a></li>
+              <li><a href="https://www.telepresence.io">Telepresence</a></li>
               </ul>
             </div>
           }
