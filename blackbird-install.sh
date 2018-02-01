@@ -25,6 +25,8 @@ main() {
 
     local _install_dir=$(pwd)/blackbird
 
+    say_info $_ansi_escapes_are_valid "Installing the Blackbird reference architecture"
+
     # --------------------------------------------------------------------------
     # Local installation
     # --------------------------------------------------------------------------
@@ -39,7 +41,7 @@ main() {
     #
     # Forge Install
     #
-    say_info $_ansi_escapes_are_valid "Downloading Forge"
+    say_info $_ansi_escapes_are_valid "Downloading Forge for deployment"
     local _forge_version="$(curl --silent https://s3.amazonaws.com/datawire-static-files/forge/latest.url?x-download=datawire)"
     ensure curl \
         --location \
@@ -53,7 +55,7 @@ main() {
     ensure sudo -s mv /tmp/forge /usr/local/bin
     ensure chmod +x /usr/local/bin/forge
 
-    say_info $_ansi_escapes_are_valid "Installing Telepresence"
+    say_info $_ansi_escapes_are_valid "Installing Telepresence for local development"
 
     # Detect if macOS, Ubuntu or Fedora
     local _platform="$(uname | tr "[:upper:]" "[:lower:]")"
@@ -77,41 +79,59 @@ main() {
       say_info $_ansi_escapes_are_valid "Detected macOS"
       need_cmd brew
       ensure brew cask install osxfuse
-      ensure brew install socat datawire/blackbird/telepresence
+      if brew ls --versions socat > /dev/null; then
+        ensure brew install socat
+      else
+        ensure brew upgrade socat
+      fi
+
+      if brew ls --versions telepresence > /dev/null; then
+        ensure brew install datawire/blackbird/telepresence
+      else
+        ensure brew upgrade telepresence
+      fi
     else
       err "Operating System not supported. Only macOS and Linux are supported!"
     fi
 
 
-    say_info $_ansi_escapes_are_valid "Configuring Blackbird to use the latest Ambassador"
+    say_info $_ansi_escapes_are_valid "Configuring Blackbird to use the latest Ambassador API Gateway"
     local _ambassador_version="$(curl --silent https://s3.amazonaws.com/datawire-static-files/ambassador/stable.txt)"
-    ensure sed -i "s|__AMBASSADOR_VERSION__|$_ambassador_version|g" ambassador/service.yaml
+    ensure sed -i"" -e "s|__AMBASSADOR_VERSION__|$_ambassador_version|g" ambassador/service.yaml
 
     # --------------------------------------------------------------------------
     # kubernetes cluster installation
     # --------------------------------------------------------------------------
 
-    PS3="Are you using a Google Kubernetes Engine (GKE) cluster? "
-    select _yn in yes no
-    do
-        case $_yn in
-          yes)
-              need_cmd gcloud
-              say_info $_ansi_escapes_are_valid "Creating RBAC cluster admin role binding"
-              ensure kubectl create clusterrolebinding \
-                my-cluster-admin-binding \
+	while true; do
+		read -p "Are you using a Google Kubernetes Engine (GKE) cluster [y/n]? " _yn
+		case $_yn in
+			[Yy]* )
+				need_cmd gcloud
+				say_info $_ansi_escapes_are_valid "Creating RBAC cluster admin role binding"
+				ensure kubectl create clusterrolebinding \
+                dw-cluster-admin-binding \
                 --clusterrole=cluster-admin \
                 --user=$(ensure gcloud info --format="value(config.account)")
-              break
-              ;;
-            *)
-              break
-              ;;
-        esac
-    done
+				break
+				;;
+			[Nn]* )
+				break
+				;;
+			* )
+				say "Please answer [y]es or [n]o."
+				;;
+		esac
+	done
 
     echo ""
-    say 'Please run `forge setup` and `forge deploy`'
+    say 'The Blackbird reference architecture has been configured locally.'
+    say 'You now need to deploy the demo application and its dependencies to your Kubernetes cluster.'
+    say 'Please run the following commands:'
+    say 'cd blackbird'
+    say 'forge setup'
+    say 'forge deploy'
+    say 'Thanks for installing the Datawire reference architecture.'
 }
 
 # Only bothering to check the minor version of Kubernetes. All bets are off if the major

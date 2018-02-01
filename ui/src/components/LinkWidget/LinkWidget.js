@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+// Filters out the ambassador links, so only root urls with a prefix of '/dev-' are shown
 const filterLinks = (links) =>
   links.routes.filter(route =>
     route.prefix.startsWith('/dev-') && (route.prefix.match(/[^/]+/g) || []).length === 1);

@@ -19,7 +19,7 @@ const App = () =>
       <h4 className="label">Demo Microservices</h4>
       <div className="module">
         <div className="module-header">
-          <h1 className="text-left">Blackbird Demo App</h1>
+          <h1 className="text-left">Demo App</h1>
           <span className="env active">Prod</span>
           <span className="env">Dev</span>
         </div>
