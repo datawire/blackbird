@@ -1,6 +1,5 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import { Grid, Container } from 'semantic-ui-react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './App.css';
@@ -10,34 +9,26 @@ import Tutorials from './components/Tutorials';
 
 const App = () =>
   <div className="app">
-    <Container>
-      <Grid columns={15}>
-        <Grid.Row className="welcome">
-          <Grid.Column width={6}>
-            <h1 className="text-left">Blackbird Demo App</h1>
-          </Grid.Column>
-          <Grid.Column width={9}>
-            <a href="/ambassador/" className="tour-button">Diagnostics</a>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column width={5}>
-            <Poller endpoint="python-api"/>
-          </Grid.Column>
-          <Grid.Column width={5}>
-            <Poller endpoint="java-spring-api"/>
-          </Grid.Column>
-          <Grid.Column width={5}>
-            <Poller endpoint="python-api"/>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column width={15}>
-            <Tutorials />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </Container>
+    <div className="container">
+      <div className="diagnostics">
+        <a href="/ambassador/" className="blue-button">Diagnostics</a>
+      </div>
+      <h4 className="label">Demo Microservices</h4>
+      <div className="module">
+        <div className="module-header">
+          <h1 className="text-left">Blackbird Demo App</h1>
+          <span className="env active">Prod</span>
+          <span className="env">Dev</span>
+        </div>
+        <div className="pollers">
+          <Poller endpoint="python-api"/>
+          <Poller endpoint="java-spring-api"/>
+          <Poller endpoint="python-api"/>
+        </div>
+      </div>
+      <h4 className="label">Get Started</h4>
+      <Tutorials />
+    </div>
   </div>;
 
 export default App;

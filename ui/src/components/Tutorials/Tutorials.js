@@ -21,13 +21,22 @@ class Tutorials extends Component {
 
     return (
     <div className="tutorials text-left">
-      <h2>Get Started</h2>
-      <p>These tutorials will help you get the most out of Datawire applications.</p>
+      <div className="tutorial-header">
+        <h2>Get Started</h2>
+        <p>These tutorials will help you get the most out of Datawire applications.</p>
+      </div>
       <div className="tutorial-content">
         <ul className="options">
-          <li onClick={() => this.changeTutorial(0)}>Make a code change. Blackbird makes it easy for developers to quickly code and test changes in Kubernetes.</li>
-          <li onClick={() => this.changeTutorial(1)}>Canary test your change. Once you've tested your code change in dev, it's time to deploy as a canary. Blackbird makes this easy.</li>
-          <li onClick={() => this.changeTutorial(2)}>Code locally. While Blackbird makes it easy to quickly make changes, sometimes you want real-time feedback. Telepresence lets you code locally against a remote Kubernetes cluster.</li>
+          <li className={ currentIdx === 0 ? 'active' : '' } onClick={() => this.changeTutorial(0)}>
+            <strong>Make a code change.</strong>
+            <span>Blackbird makes it easy for developers to quickly code and test changes in Kubernetes.</span>
+          </li>
+          <li className={ currentIdx === 1 ? 'active' : '' } onClick={() => this.changeTutorial(1)}>
+            <strong>Canary test your change.</strong>
+            <span>Once you've tested your code change in dev, it's time to deploy as a canary. Blackbird makes this easy.</span></li>
+          <li className={ currentIdx === 2 ? 'active' : '' } onClick={() => this.changeTutorial(2)}>
+            <strong>Code locally.</strong>
+            <span>While Blackbird makes it easy to quickly make changes, sometimes you want real-time feedback. Telepresence lets you code locally against a remote Kubernetes cluster.</span></li>
         </ul>
         <div className="content">
           { currentIdx === 0 &&
@@ -86,12 +95,10 @@ class Tutorials extends Component {
                 </li>
                 <li>
                   To fully deploy your changes into production, switch to the master branch, merge your changes, and redeploy.
-                  <p>
                   <pre>{`git checkout master
 git merge dev/my-first-change
 forge deploy
                   `}</pre>
-                  </p>
                   </li>
                 </ol>
                 <p>Further reading</p>
@@ -122,6 +129,9 @@ forge deploy
             </div>
           }
         </div>
+      </div>
+      <div className="tutorial-footer">
+        <a href="#" className="blue-button">More</a>
       </div>
     </div>);
   }

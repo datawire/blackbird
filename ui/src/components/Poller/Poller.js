@@ -69,7 +69,7 @@ class Poller extends Component {
 
     return (
       <Card>
-        <Card.Content>{this.props.endpoint}</Card.Content>
+        <Card.Content className="poller-name">{this.props.endpoint}</Card.Content>
         <Card.Content className="poller-content">{items}</Card.Content>
         <Card.Content extra>latency: {stable}, {canary}</Card.Content>
       </Card>
