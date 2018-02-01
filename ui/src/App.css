@@ -1,3 +1,11 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    background: #F5F7FA;
+    font-weight: 400;
+}
+
 .app {
   text-align: center;
 }
@@ -25,15 +33,83 @@
 .text-center {
     text-align: center;
 }
+.float-right {
+    float: right;
+}
 
-.tour-button {
+.container {
+    max-width: 1040px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.blue-button {
     background: #62c2d7;
     color: white;
     text-decoration: none;
     text-transform: uppercase;
     font-weight: 600;
+    font-size: 18px;
     display: inline-block;
     padding: 13px 40px;
     min-width: 250px;
-    float: right;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.blue-button:hover {
+    opacity: 0.9;
+    color: white;
+}
+
+.module {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    background: #fff;
+    margin: 0 0 50px;
+    padding: 25px 50px 50px;
+}
+
+.module-header {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 35px;
+    align-items: center;
+}
+
+.module-header .env {
+    font-size: 14px;
+    font-weight: bold;
+    color: #62C2D7;
+    padding: 3px 10px;
+    margin: 0 2px;
+}
+
+.module-header .env.active {
+    background: #F9634E;
+    color: #fff;
+    border-radius: 2px;
+}
+
+.module-header h1 {
+    font-size: 28px;
+    color: #222222;
+    letter-spacing: -1.17px;
+    line-height: 58px;
+    margin: 0 25px 0 0;
+}
+
+.label {
+    text-align: left;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: #222222;
+    font-size: 20px;
+    padding-bottom: 25px;
+    margin: 0;
+}
+
+.diagnostics {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
 }

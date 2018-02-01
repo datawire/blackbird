@@ -1,9 +1,34 @@
-.poller-content {
-    max-height: 150px;
-    overflow-y: auto;
-    overflow-x: hidden;
+.pollers {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .ui.card {
-    width: 100%;
+    width: 300px;
+    border-radius: 0;
+    box-shadow: none;
+    border: 2px solid #EBEDF0;
+    margin: 0 !important;
+}
+
+.ui.card > .content.poller-content {
+    height: 130px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    color: #222222;
+    font-size: 17px;
+}
+
+.ui.card > .content.poller-name {
+    background: #9B9B9B;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    margin: -2px -2px 0;
+    border-radius: 0 !important;
+}
+
+.ui.card > .extra {
+    margin: 0 10px;
 }
