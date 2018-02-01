@@ -5,6 +5,7 @@
   "dependencies": {
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
+    "react-joyride": "^1.11.1",
     "react-scripts": "1.0.17",
     "react-slick": "^0.16.0",
     "recharts": "1.0.0-beta.6",

@@ -20,7 +20,7 @@ class Tutorials extends Component {
     const { currentIdx } = this.state;
 
     return (
-    <div className="tutorials text-left">
+    <div className="tutorials text-left step2">
       <div className="tutorial-header">
         <h2>Datawire Reference Architecture</h2>
         <p>The Datawire Reference Architecture illustrates some of the key aspects of a productive development workflow. The architecture is built using the <a href="https://www.getambassador.io">Ambassador API Gateway</a>, the <a href="https://forge.sh">Forge deployment system</a>, and <a href="https://www.telepresence.io">Telepresence</a>. </p>

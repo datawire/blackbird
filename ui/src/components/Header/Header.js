@@ -14,7 +14,7 @@ import productTour from '../../images/product-tour-icon.svg';
 import github from '../../images/github-icon.svg';
 
 
-const Header = () =>
+const Header = ({ startTour }) =>
   <header className="site-header">
     <a target="_blank" className="logo" href="https://www.datawire.io/?utm_source=blackbird&utm_medium=web&utm_campaign=demo" rel="noopener noreferrer">
       <img alt="Datawire" src={logo} />
@@ -56,7 +56,7 @@ const Header = () =>
         </li>
       </ul>
     </div>
-    <div className="menu help">
+    <div className="menu help step4">
       <span>Help <img alt="" src={arrow} /></span>
       <ul className="dropdown">
         <li>
@@ -84,7 +84,7 @@ const Header = () =>
           </a>
         </li>
         <li>
-          <a href="">
+          <a onClick={startTour}>
             <div className="icon">
               <img alt="" src={productTour} />
             </div>
