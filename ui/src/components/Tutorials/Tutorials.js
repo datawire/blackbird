@@ -81,7 +81,7 @@ class Tutorials extends Component {
           }
           { currentIdx === 1 &&
             <div className="tutorial">
-              We've made a change on a development branch, and now it's time to roll it out to users. We can do this with a canary test.
+              We've made a change on a development branch, and now it's time to roll it out to users. We can do this with a canary test. This requires close integration between your development workflow and your operational infrastructure. In the reference architecture, we use <a href="https://www.getambassador.io">Ambassador</a> as our API Gateway, and <a href="https://forge.sh">Forge</a> to manage our development workflow.
               <ol>
                 <li>
                   We've defined a <i>profile</i> for canary testing that specifies that 50% of the traffic will be routed to a canary service. On your development branch, let's use this profile to deploy the same code as a canary.
@@ -115,8 +115,7 @@ forge deploy
                 <li>
                   We will use the <code>python-api</code> service in this tutorial. First, we will build a local Docker container for development.
                   <p><pre>{`cd python-api
-docker build . -t python-api-dev
-                  `}</pre></p>
+docker build . -t python-api-dev`}</pre></p>
                 </li>
                 <li>
                   We will use Telepresence to 1) start your service in the local container and 2) route requests to this service from your remote Kubernetes cluster to your local container. We will also use a volume mount to mount our local filesystem into the Docker container.
@@ -134,9 +133,6 @@ docker build . -t python-api-dev
             </div>
           }
         </div>
-      </div>
-      <div className="tutorial-footer">
-        <a href="#" className="blue-button">More</a>
       </div>
     </div>);
   }
