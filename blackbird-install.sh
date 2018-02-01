@@ -103,24 +103,26 @@ main() {
     # kubernetes cluster installation
     # --------------------------------------------------------------------------
 
-    PS3="Are you using a Google Kubernetes Engine (GKE) cluster? "
-    select _yn in yes no
-    do
-        case $_yn in
-          yes)
-              need_cmd gcloud
-              say_info $_ansi_escapes_are_valid "Creating RBAC cluster admin role binding"
-              ensure kubectl create clusterrolebinding \
+	while true; do
+		read -p "Are you using a Google Kubernetes Engine (GKE) cluster [y/n]? " _yn
+		case $_yn in
+			[Yy]* ) 
+				need_cmd gcloud
+				say_info $_ansi_escapes_are_valid "Creating RBAC cluster admin role binding"
+				ensure kubectl create clusterrolebinding \
                 my-cluster-admin-binding \
                 --clusterrole=cluster-admin \
                 --user=$(ensure gcloud info --format="value(config.account)")
-              break
-              ;;
-            *)
-              break
-              ;;
-        esac
-    done
+				break
+				;;
+			[Nn]* ) 
+				break
+				;;
+			* ) 
+				say "Please answer [y]es or [n]o."
+				;;
+		esac
+	done
 
     echo ""
     say 'The Blackbird reference architecture has been configured locally.'
