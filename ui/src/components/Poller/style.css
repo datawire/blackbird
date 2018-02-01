@@ -10,6 +10,7 @@
     box-shadow: none;
     border: 2px solid #EBEDF0;
     margin: 0 !important;
+    text-align: center;
 }
 
 .ui.card > .content.poller-content {

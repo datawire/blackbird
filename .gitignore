@@ -3,6 +3,8 @@ forge.yaml
 *~
 telepresence.log
 
+.DS_Store
+
 # --- Intellij IDEA ---
 .idea 
 *.iml

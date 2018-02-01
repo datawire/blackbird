@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="43px" height="25px" viewBox="0 0 43 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>telepresence</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Dashboard---Product-menu" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-146.000000, -252.000000)">
+        <g id="Products-drop-down" transform="translate(109.000000, 58.000000)">
+            <g id="telepresence" transform="translate(38.000000, 194.000000)">
+                <polygon id="Line-Copy-3" fill="#F9634E" fill-rule="nonzero" points="22 3 22 0 18 0 18 3"></polygon>
+                <path d="M5.89611737,4 C2.63978166,4 0,6.67210618 0,9.96838262 L0,18.7142039 C0,22.0104506 2.62237734,24.356753 5.85389802,23.9552326 L17.573743,22.4990277 C19.1898701,22.2982219 21.8135523,22.2986472 23.426257,22.4990277 L35.146102,23.9552326 C38.3791206,24.3569391 41,22.0104803 41,18.7142039 L41,9.96838262 C41,6.67213592 38.3572011,4 35.1038826,4 L5.89611737,4 Z" id="Shape-Copy-2" stroke="#F9634E" stroke-width="2" fill-rule="nonzero"></path>
+                <circle id="Oval-9" fill="#F9634E" cx="6" cy="10" r="2"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

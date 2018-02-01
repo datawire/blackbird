@@ -1,0 +1,102 @@
+.site-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: #fff;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
+    height: 68px;
+    padding: 0 30px;
+}
+
+.logo {
+    margin-right: 35px;
+}
+.logo img {
+    display: block;
+    height: 35px;
+    width: 158px;
+}
+
+.menu {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    height: 68px;
+    line-height: 68px;
+}
+
+.menu.help {
+    margin-left: auto;
+}
+
+.menu.help .dropdown {
+    right: 0;
+    width: 380px;
+}
+
+.menu.products .dropdown {
+    left: 0;
+    width: 280px;
+}
+
+.menu:hover .dropdown {
+    display: flex;
+}
+
+.menu > span {
+    color: #2B2F3E;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: -0.4px;
+    align-items: center;
+    display: flex;
+}
+
+.menu > span > img {
+    margin-left: 6px;
+}
+
+.dropdown {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    position: absolute;
+    z-index: 9999;
+    display: none;
+    top: 55px;
+}
+
+.dropdown li {
+    border-bottom: 1px solid #E9E9E9;
+}
+
+.dropdown li:last-child {
+    border: none;
+}
+
+.dropdown li a {
+    padding: 0px 35px;
+    height: 85px;
+    display: flex;
+    font-size: 20px;
+    color: #333333;
+    font-weight: 600;
+    letter-spacing: -0.4px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.dropdown li a:hover {
+    text-decoration: none;
+    background: #f4f4f5;
+}
+
+.dropdown li a > .icon {
+    width: 55px;
+    display: flex;
+}

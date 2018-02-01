@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="31px" height="31px" viewBox="0 0 31 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>forge</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Dashboard---Product-menu" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-153.000000, -82.000000)">
+        <g id="Products-drop-down" transform="translate(109.000000, 58.000000)" fill-rule="nonzero" stroke="#F9634E" stroke-width="2">
+            <g id="forge" transform="translate(59.000000, 39.000000) rotate(111.000000) translate(-59.000000, -39.000000) translate(41.000000, 23.000000)">
+                <g id="noun_829070_cc" transform="translate(12.742767, 16.004516) rotate(-17.000000) translate(-12.742767, -16.004516) translate(3.742767, 2.504516)">
+                    <path d="M8.46459498,0.773389364 L0.0373979305,15.5054546 L1.5841758,23.6183482 L5.50838325,26.1735372 C6.1657269,26.5495942 17.3974654,6.06159378 17.3974654,6.06159378 L8.46459498,0.773389364 Z" id="Shape"></path>
+                </g>
+                <polygon id="Line" points="15.9296489 19.1624057 34.5295463 23.4507179 35.185964 19.7303758 16.5860665 15.4420636"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

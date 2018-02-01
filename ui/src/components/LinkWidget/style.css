@@ -1,0 +1,75 @@
+.LinkWidget {
+    position: fixed;
+    bottom: 50px;
+    right: 30px;
+    text-align: right;
+}
+
+.LinkWidget .widget-body {
+    border-radius: 4px;
+    overflow: hidden;
+    width: 513px;
+    background: #fff;
+    box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.LinkWidget .widget-title {
+    background: #F9634E;
+    color: #fff;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 25px;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.4px;
+}
+
+.LinkWidget .widget-links {
+    padding: 25px;
+}
+
+.LinkWidget .widget-links ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.LinkWidget .widget-links ul li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 6px;
+}
+
+.LinkWidget .widget-links ul li:before {
+    position: absolute;
+    content: "";
+    background: url('../../images/right-arrow.svg') no-repeat center center;
+    height: 10px;
+    width: 7px;
+    left: 0;
+    top: 10px;
+}
+
+.LinkWidget .widget-links ul li a {
+    color: #F9634E;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 28px;
+}
+
+.LinkWidget .widget-button {
+    background: #F9634E;
+    color: #fff;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    letter-spacing: -0.3px;
+    font-weight: 300;
+    border-radius: 20px;
+    padding:  12px 35px;
+    cursor: pointer;
+    margin-top: 20px;
+}

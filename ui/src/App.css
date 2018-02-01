@@ -4,21 +4,16 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
     background: #F5F7FA;
     font-weight: 400;
+    min-width: 1100px;
 }
 
-.app {
-  text-align: center;
+a {
+    color: #62c2d7;
 }
 
-.logo {
-    animation: spin infinite 20s linear;
+a:hover {
+    text-decoration: underline;
 }
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 
 .welcome {
     margin: 35px 0;
@@ -60,6 +55,7 @@ body {
 .blue-button:hover {
     opacity: 0.9;
     color: white;
+    text-decoration: none;
 }
 
 .module {

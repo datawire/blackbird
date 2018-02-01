@@ -4,11 +4,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './App.css';
 
+import Header from './components/Header';
 import Poller from './components/Poller';
 import Tutorials from './components/Tutorials';
+import LinkWidget from './components/LinkWidget';
 
 const App = () =>
   <div className="app">
+    <Header />
     <div className="container">
       <div className="diagnostics">
         <a href="/ambassador/" className="blue-button">Diagnostics</a>
@@ -29,6 +32,7 @@ const App = () =>
       <h4 className="label">Get Started</h4>
       <Tutorials />
     </div>
+    <LinkWidget />
   </div>;
 
 export default App;

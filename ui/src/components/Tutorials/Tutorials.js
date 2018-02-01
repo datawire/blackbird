@@ -81,7 +81,7 @@ class Tutorials extends Component {
           }
           { currentIdx === 1 &&
             <div className="tutorial">
-              We've made a change on a development branch, and now it's time to roll it out to users. We can do this with a canary test. This requires close integration between your development workflow and your operational infrastructure. In the reference architecture, we use <a href="https://www.getambassador.io">Ambassador</a> as our API Gateway, and <a href="https://forge.sh">Forge</a> to manage our development workflow.
+              <p>We've made a change on a development branch, and now it's time to roll it out to users. We can do this with a canary test. This requires close integration between your development workflow and your operational infrastructure. In the reference architecture, we use <a href="https://www.getambassador.io">Ambassador</a> as our API Gateway, and <a href="https://forge.sh">Forge</a> to manage our development workflow.</p>
               <ol>
                 <li>
                   We've defined a <i>profile</i> for canary testing that specifies that 50% of the traffic will be routed to a canary service. On your development branch, let's use this profile to deploy the same code as a canary.
@@ -133,6 +133,9 @@ docker build . -t python-api-dev`}</pre></p>
             </div>
           }
         </div>
+      </div>
+      <div className="tutorial-footer">
+        <a href="https://www.datawire.io" className="blue-button">More</a>
       </div>
     </div>);
   }
