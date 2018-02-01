@@ -42,7 +42,7 @@ main() {
     # Forge Install
     #
     say_info $_ansi_escapes_are_valid "Downloading Forge for deployment"
-    local _forge_version="$(curl --silent https://s3.amazonaws.com/datawire-static-files/forge/latest.url?x-download=datawire)"
+    local _forge_version="$(curl --silent https://s3.amazonaws.com/datawire-static-files/forge/latest.url?x-download=blackbird)"
     ensure curl \
         --location \
         --output /tmp/forge \
