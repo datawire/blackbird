@@ -19,7 +19,7 @@ class Poller extends Component {
 
   poll() {
     var start = new Date().getTime();
-    fetch(this.props.endpoint, {credentials: "same-origin"}).then(response => response.text()).then(text => {
+    fetch(this.props.endpoint, { credentials: 'same-origin' }).then(response => response.text()).then(text => {
       this.setState(prev => {
         var now = new Date().getTime();
         var elapsed = now - start;

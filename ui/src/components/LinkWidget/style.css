@@ -31,6 +31,12 @@
     padding: 25px;
 }
 
+.LinkWidget .widget-links p {
+    font-size: 18px;
+    text-align: center;
+    color: #4A4A4A;
+}
+
 .LinkWidget .widget-links ul {
     list-style-type: none;
     margin: 0;

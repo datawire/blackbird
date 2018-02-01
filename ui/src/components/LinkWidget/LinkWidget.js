@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 
-// Filters out the ambassador links, so only root urls with a prefix of '/dev-' are shown
+// Filters out the ambassador links, so only root urls with a prefix of 'dev-' are shown
 const filterLinks = (links) =>
   links.routes.filter(route =>
-    route.prefix.startsWith('/dev-') && (route.prefix.match(/[^/]+/g) || []).length === 1);
+    route.prefix.startsWith('dev-') && (route.prefix.match(/[^/]+/g) || []).length === 1);
 
 class LinkWidget extends Component {
 
   constructor() {
     super();
     this.state = {
-      open: true,
+      open: false,
       links: []
     };
 
@@ -19,7 +19,7 @@ class LinkWidget extends Component {
   }
 
   loadLinks() {
-    fetch('/ambassador/?json=true', {credentials: "same-origin"})
+    fetch('/ambassador/?json=true', { credentials: 'same-origin' })
       .then(response => response.json())
       .then((links) => {
         this.setState({
@@ -49,12 +49,13 @@ class LinkWidget extends Component {
           </div>
           <div className="widget-links">
             <ul>
-              {
+              { links.length ?
                 links.map((link, i) =>
                   <li key={i}>
                     <a target="_blank" rel="noopener noreferrer" href={ link.prefix }>{ link.prefix }</a>
                   </li>
-                )
+                ) :
+                <p>No development environments currently deployed.</p>
               }
             </ul>
           </div>
