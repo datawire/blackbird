@@ -106,19 +106,19 @@ main() {
 	while true; do
 		read -p "Are you using a Google Kubernetes Engine (GKE) cluster [y/n]? " _yn
 		case $_yn in
-			[Yy]* ) 
+			[Yy]* )
 				need_cmd gcloud
 				say_info $_ansi_escapes_are_valid "Creating RBAC cluster admin role binding"
 				ensure kubectl create clusterrolebinding \
-                my-cluster-admin-binding \
+                dw-cluster-admin-binding \
                 --clusterrole=cluster-admin \
                 --user=$(ensure gcloud info --format="value(config.account)")
 				break
 				;;
-			[Nn]* ) 
+			[Nn]* )
 				break
 				;;
-			* ) 
+			* )
 				say "Please answer [y]es or [n]o."
 				;;
 		esac
@@ -127,7 +127,11 @@ main() {
     echo ""
     say 'The Blackbird reference architecture has been configured locally.'
     say 'You now need to deploy the demo application and its dependencies to your Kubernetes cluster.'
-    say 'To do this, please run `forge setup` followed by `forge deploy`.'
+    say 'Please run the following commands:'
+    say 'cd blackbird'
+    say 'forge setup'
+    say 'forge deploy'
+    say 'Thanks for installing the Datawire reference architecture.'
 }
 
 # Only bothering to check the minor version of Kubernetes. All bets are off if the major
