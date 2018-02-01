@@ -81,7 +81,7 @@ class Tutorials extends Component {
           }
           { currentIdx === 1 &&
             <div className="tutorial">
-              We've made a change on a development branch, and now it's time to roll it out to users. We can do this with a canary test.
+              <p>We've made a change on a development branch, and now it's time to roll it out to users. We can do this with a canary test.</p>
               <ol>
                 <li>
                   We've defined a <i>profile</i> for canary testing that specifies that 50% of the traffic will be routed to a canary service. On your development branch, let's use this profile to deploy the same code as a canary.
@@ -131,7 +131,7 @@ forge deploy
         </div>
       </div>
       <div className="tutorial-footer">
-        <a href="#" className="blue-button">More</a>
+        <a href="https://www.datawire.io" className="blue-button">More</a>
       </div>
     </div>);
   }

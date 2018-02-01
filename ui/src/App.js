@@ -7,6 +7,7 @@ import './App.css';
 import Header from './components/Header';
 import Poller from './components/Poller';
 import Tutorials from './components/Tutorials';
+import LinkWidget from './components/LinkWidget';
 
 const App = () =>
   <div className="app">
@@ -31,6 +32,7 @@ const App = () =>
       <h4 className="label">Get Started</h4>
       <Tutorials />
     </div>
+    <LinkWidget />
   </div>;
 
 export default App;

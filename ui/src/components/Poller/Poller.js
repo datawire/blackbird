@@ -34,7 +34,7 @@ class Poller extends Component {
       if (this.active) {
         setTimeout(() => this.poll(), 1000);
       }
-    });
+    }).catch(err => console.log(err));
   }
 
   latency(responses, profile) {
