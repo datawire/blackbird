@@ -47,8 +47,6 @@ spec:
       containers:
       - name: {{build.name}}
         env:
-        - name: MESSAGEURL
-          value: http://message-{{build.profile.name}}/
         - name: BUILD_PROFILE
           value: {{build.profile.name}}
         image: {{build.images["Dockerfile"]}}
