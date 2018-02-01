@@ -1,0 +1,24 @@
+{% set sanitized_branch = (branch or "dev").replace('/', '-') %}
+
+name: nodejs-api
+namespace: datawire
+
+profiles:
+  stable:
+    endpoint: /nodejs-api
+    max_memory: 0.1G
+    max_cpu: 0.1
+  canary:
+    endpoint: /nodejs-api
+    weight: 50 # percentage of traffic to route to this class of deployment
+    max_memory: 0.1G
+    max_cpu: 0.1
+  default:
+    name: {{sanitized_branch}}
+    endpoint: /{{sanitized_branch}}/nodejs-api
+    max_memory: 0.1G
+    max_cpu: 0.1
+
+branches:
+  master: stable
+  dev/*: default
