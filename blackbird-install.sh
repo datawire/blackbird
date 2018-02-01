@@ -123,7 +123,9 @@ main() {
     done
 
     echo ""
-    say 'Please run `forge setup` and `forge deploy`'
+    say 'The Blackbird reference architecture has been configured locally.'
+    say 'You now need to deploy the demo application and its dependencies to your Kubernetes cluster.'
+    say 'To do this, please run `forge setup` followed by `forge deploy`.'
 }
 
 # Only bothering to check the minor version of Kubernetes. All bets are off if the major
