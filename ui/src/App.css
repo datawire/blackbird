@@ -7,6 +7,10 @@ body {
     min-width: 1100px;
 }
 
+button, input {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
 a {
     color: #62c2d7;
 }
@@ -100,12 +104,61 @@ a:hover {
     text-transform: uppercase;
     color: #222222;
     font-size: 20px;
-    padding-bottom: 25px;
-    margin: 0;
+    margin: 0 0 25px;
 }
 
 .diagnostics {
     display: flex;
     justify-content: flex-end;
     margin-top: 30px;
+}
+
+.joyride-tooltip {
+    color: #4A4A4A;
+}
+
+.joyride-tooltip__button--primary {
+    padding: 10px 30px;
+    font-size: 18px;
+    font-weight: 500;
+    background: #62c2d7;
+    color: #fff;
+}
+
+.joyride-tooltip__button--primary:active, .joyride-tooltip__button--primary:focus, .joyride-tooltip__button--primary:hover {
+    background: #62c2d7;
+    opacity: 0.9;
+}
+
+.joyride-tooltip__button--secondary {
+    color: #4A4A4A;
+}
+
+.joyride-tooltip__header ~ .joyride-tooltip__main {
+    color: #4A4A4A;
+    font-size: 18px;
+    padding: 25px 0 30px;
+    line-height: 25px;
+}
+
+.joyride-tooltip__header {
+    border-bottom: 1px solid #DCDCDC;
+    color: #222222;
+    font-size: 28px;
+    line-height: 35px;
+    font-weight: 600;
+    padding-bottom: 15px;
+}
+
+.joyride-beacon__outer {
+    border-color: #F9634E;
+}
+
+.joyride-beacon__inner {
+    background: #F9634E;
+}
+
+.joyride-tooltip__close--header {
+    height: 17px;
+    width: 17px;
 }
