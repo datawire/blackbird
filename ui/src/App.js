@@ -78,7 +78,7 @@ class App extends Component {
         type="continuous"
         steps={[{
           title: 'Demo Microservices',
-          text: 'These are sample microservices written in Python and Java that can be easily modified to try different aspects of the reference architecture.',
+          text: 'These are sample microservices written in Python, Java, and NodeJS that can be easily modified to try different aspects of the reference architecture.',
           selector: '.step1',
           position: 'top-left'
         },

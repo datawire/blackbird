@@ -134,9 +134,6 @@ docker build . -t python-api-dev`}</pre></p>
           }
         </div>
       </div>
-      <div className="tutorial-footer">
-        <a href="https://www.datawire.io" className="blue-button">More</a>
-      </div>
     </div>);
   }
 }

@@ -51,7 +51,7 @@ const Header = ({ startTour }) =>
             <div className="icon">
               <img alt="" src={blackbird} />
             </div>
-            <span>Blackbird</span>
+            <span>Reference Architecture</span>
           </a>
         </li>
       </ul>
@@ -68,7 +68,7 @@ const Header = ({ startTour }) =>
           </a>
         </li>
         <li>
-          <a target="_blank" href="https://gitter.im/datawire/home" rel="noopener noreferrer">
+          <a target="_blank" href="https://gitter.im/datawire/users" rel="noopener noreferrer">
             <div className="icon">
               <img alt="" src={gitter} />
             </div>
