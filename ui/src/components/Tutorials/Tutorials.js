@@ -23,7 +23,7 @@ class Tutorials extends Component {
     <div className="tutorials text-left step2">
       <div className="tutorial-header">
         <h2>Datawire Reference Architecture</h2>
-        <p>The Datawire Reference Architecture illustrates some of the key aspects of a productive development workflow. The architecture is built using the <a href="https://www.getambassador.io">Ambassador API Gateway</a>, the <a href="https://forge.sh">Forge deployment system</a>, and <a href="https://www.telepresence.io">Telepresence</a>. </p>
+        <p>The Datawire Reference Architecture illustrates some of the key aspects of a productive development workflow. The architecture is built using the <a href="https://www.getambassador.io">Ambassador API Gateway</a>, the <a href="https://forge.sh">Forge deployment system</a>, and <a href="https://www.telepresence.io">Telepresence</a> for local development. </p>
       </div>
       <div className="tutorial-content">
         <ul className="options">
@@ -63,6 +63,11 @@ class Tutorials extends Component {
                      <li>Uncomment the line <code>environment="TEST"</code>.</li>
                      </ul>
                     </li>
+                    <li>If you prefer editing JavaScript:
+                      <ul>
+                      <li>Open <code>nodejs-api/server.js</code>.</li>
+                      <li>Uncomment the line <code>environment = 'TEST'</code>.</li>
+                      </ul>
                   </ul>
                 </li>
                 <li>
