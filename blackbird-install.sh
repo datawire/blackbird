@@ -131,6 +131,8 @@ main() {
     say 'cd blackbird'
     say 'forge setup'
     say 'forge deploy'
+    say 'Note that the deployment process may take a few minutes as'
+    say 'it builds Java, NodeJS, and Python microservices.'
     say 'Thanks for installing the Datawire reference architecture.'
 }
 
