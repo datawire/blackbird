@@ -56,7 +56,7 @@ const Header = ({ startTour }) =>
         </li>
       </ul>
     </div>
-    <div className="menu help step4">
+    <div className="menu help step5">
       <span>Help <img alt="" src={arrow} /></span>
       <ul className="dropdown">
         <li>

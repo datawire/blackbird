@@ -6,6 +6,11 @@
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
     height: 68px;
     padding: 0 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
 }
 
 .logo {
@@ -36,7 +41,7 @@
 
 .menu.products .dropdown {
     left: 0;
-    width: 280px;
+    width: 320px;
 }
 
 .menu:hover .dropdown {

@@ -60,7 +60,7 @@ class LinkWidget extends Component {
             </ul>
           </div>
         </div> : null }
-        <button onClick={this.toggleWidget} className="widget-button">
+        <button onClick={this.toggleWidget} className="widget-button step4">
           { open ? 'Dismiss' : 'Development Environments' }
         </button>
       </div>
