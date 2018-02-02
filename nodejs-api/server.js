@@ -10,6 +10,7 @@ const elapsed = () => {
 
 app.get('/', (req, res) => {
   let environment = process.env['BUILD_PROFILE']
+  // environment = 'TEST'
   res.send(elapsed() + ' (' + environment + ')\n')
 })
 
