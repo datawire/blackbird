@@ -61,7 +61,7 @@ class App extends Component {
           <div className="pollers">
             <Poller endpoint="python-api"/>
             <Poller endpoint="java-spring-api"/>
-            <Poller endpoint="python-api"/>
+            <Poller endpoint="nodejs-api"/>
           </div>
         </div>
         <h4 className="label">Get Started</h4>
