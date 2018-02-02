@@ -1,10 +1,10 @@
 body {
     margin: 0;
-    padding: 0;
     font-family: 'Source Sans Pro', sans-serif;
     background: #F5F7FA;
     font-weight: 400;
     min-width: 1100px;
+    padding: 68px 0 0;
 }
 
 button, input {
@@ -42,6 +42,19 @@ a:hover {
     margin: 0 auto;
 }
 
+.link-button{
+    color: #4A4A4A;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+.link-button:hover {
+    text-decoration: underline;
+}
+
 .blue-button {
     background: #62c2d7;
     color: white;
@@ -54,6 +67,16 @@ a:hover {
     min-width: 250px;
     border-radius: 3px;
     text-align: center;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.blue-button.small {
+    padding: 10px 30px;
+    font-weight: 500;
+    min-width: 0;
+    text-transform: none;
 }
 
 .blue-button:hover {
@@ -137,7 +160,7 @@ a:hover {
 .joyride-tooltip__header ~ .joyride-tooltip__main {
     color: #4A4A4A;
     font-size: 18px;
-    padding: 25px 0 30px;
+    padding: 20px 0 25px;
     line-height: 25px;
 }
 
@@ -161,4 +184,41 @@ a:hover {
 .joyride-tooltip__close--header {
     height: 17px;
     width: 17px;
+}
+
+.joyride-hole {
+    box-shadow: 0 0 0 9999px rgba(66, 66, 66, 0.3), 0 0 15px rgba(66, 66, 66, 0.3);
+}
+
+.joyride-tooltip {
+    filter: drop-shadow(-1px -2px 3px rgba(0, 0, 0, 0.1)) drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.1))
+}
+
+.ui.dimmer {
+   background: rgba(66, 66, 66, 0.3);
+}
+
+.ui.tiny.modal {
+    padding: 0 20px;
+}
+
+.ui.modal>.header:not(.ui) {
+    color: #222222;
+    font-size: 28px;
+    line-height: 35px;
+    font-weight: 600;
+    padding: 20px 0 15px;
+}
+
+.ui.modal>.content {
+    color: #4A4A4A;
+    font-size: 18px;
+    padding: 25px 0 30px;
+    line-height: 25px;
+}
+
+.ui.modal>.actions {
+    border: none;
+    background: transparent;
+    padding-bottom: 20px;
 }
