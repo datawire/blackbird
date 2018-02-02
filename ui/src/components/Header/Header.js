@@ -88,7 +88,7 @@ const Header = ({ startTour }) =>
             <div className="icon">
               <img alt="" src={productTour} />
             </div>
-            <span>Product Tour</span>
+            <span>Tour</span>
           </a>
         </li>
         <li>

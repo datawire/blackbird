@@ -78,11 +78,11 @@ class App extends Component {
           Congratulations!
         </Modal.Header>
         <Modal.Content>
-          <p>You’ve successfully installed the Datawire Reference Architecture</p>
+          <p>You’ve successfully installed the Datawire Reference Architecture.</p>
         </Modal.Content>
         <Modal.Actions>
           <button className="link-button" onClick={this.hideWelcomeModal}>skip</button>
-          <button className="blue-button small" onClick={this.toggleTour}>Take Product Tour</button>
+          <button className="blue-button small" onClick={this.toggleTour}>Take Tour</button>
         </Modal.Actions>
       </Modal>
       <Joyride
