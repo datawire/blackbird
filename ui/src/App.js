@@ -12,6 +12,8 @@ import Poller from './components/Poller';
 import Tutorials from './components/Tutorials';
 import LinkWidget from './components/LinkWidget';
 
+import blackbirdLogo from './images/blackbird-logo.svg';
+
 class App extends Component {
 
   constructor() {
@@ -53,10 +55,16 @@ class App extends Component {
       <Header
         startTour={this.toggleTour}
       />
-      <div className="container">
-        <div className="diagnostics">
+      <div className="blackbird-header">
+        <div className="container">
+          <div className="blackbird-logo">
+            <img alt="Blackbird" src={blackbirdLogo} />
+            <span>Blackbird</span>
+          </div>
           <a href="/ambassador/" className="blue-button step3">Diagnostics</a>
         </div>
+      </div>
+      <div className="container">
         <h4 className="label">Demo Microservices</h4>
         <div className="module step1">
           <div className="module-header">

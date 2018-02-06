@@ -11,7 +11,8 @@ class LinkWidget extends Component {
     super();
     this.state = {
       open: false,
-      links: []
+      links: [],
+      active: false
     };
 
     this.toggleWidget = this.toggleWidget.bind(this);
@@ -24,7 +25,10 @@ class LinkWidget extends Component {
       .then((links) => {
         this.setState({
           links: filterLinks(links)
-        })
+        });
+        if (this.active) {
+          setTimeout(() => this.poll(), 1000);
+        }
       }).catch(err => console.log(err));
   }
 
@@ -35,7 +39,12 @@ class LinkWidget extends Component {
   }
 
   componentDidMount() {
+    this.active = true;
     this.loadLinks();
+  }
+
+  componentWillUnmount() {
+    this.active = false;
   }
 
   render() {

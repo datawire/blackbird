@@ -130,10 +130,32 @@ a:hover {
     margin: 0 0 25px;
 }
 
-.diagnostics {
+.blackbird-header {
+    background: #EAEDF1;
+    margin-bottom: 60px;
+}
+
+.blackbird-header .container {
     display: flex;
-    justify-content: flex-end;
-    margin-top: 30px;
+    justify-content: space-between;
+    align-items: center;
+    height: 120px;
+}
+
+.blackbird-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #222222;
+    font-weight: 600;
+    font-size: 28px;
+    letter-spacing: -1.17px;
+}
+.blackbird-logo > img {
+    height: 83px;
+    width: 83px;
+    display: block;
+    margin-right: 10px;
 }
 
 .joyride-tooltip {
