@@ -27,7 +27,7 @@ class LinkWidget extends Component {
           links: filterLinks(links)
         });
         if (this.active) {
-          setTimeout(() => this.poll(), 1000);
+          setTimeout(() => this.loadLinks(), 1000);
         }
       }).catch(err => console.log(err));
   }
