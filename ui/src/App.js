@@ -59,7 +59,7 @@ class App extends Component {
         <div className="container">
           <div className="blackbird-logo">
             <img alt="Blackbird" src={blackbirdLogo} />
-            <span>Blackbird</span>
+            <span>Datawire Reference Architecture</span>
           </div>
           <a href="/ambassador/" className="blue-button step3">Diagnostics</a>
         </div>
