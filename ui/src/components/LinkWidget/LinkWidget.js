@@ -61,7 +61,7 @@ class LinkWidget extends Component {
               { links.length ?
                 links.map((link, i) =>
                   <li key={i}>
-                    <a target="_blank" rel="noopener noreferrer" href={ link.prefix }>{ link.prefix }</a>
+                    <a target="_blank" rel="noopener noreferrer" href={ `/${link.prefix}/` }>{ link.prefix }</a>
                   </li>
                 ) :
                 <p>No development environments currently deployed.</p>
