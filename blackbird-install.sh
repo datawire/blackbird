@@ -104,7 +104,7 @@ main() {
     # --------------------------------------------------------------------------
 
 	while true; do
-		read -p "Are you using a Google Kubernetes Engine (GKE) cluster [y/n]? " _yn
+		read -p "Are you using a Google Kubernetes Engine (GKE) cluster [y/n]? " _yn </dev/tty
 		case $_yn in
 			[Yy]* )
 				need_cmd gcloud
