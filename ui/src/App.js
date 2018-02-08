@@ -20,11 +20,11 @@ class App extends Component {
     super();
 
     this.state = {
-      showWelcomeModal: true,
+      showWelcomeModal: false,
       showTour: false
     };
 
-    this.hideWelcomeModal = this.hideWelcomeModal.bind(this);
+    this.toggleWelcomeModal = this.toggleWelcomeModal.bind(this);
     this.toggleTour = this.toggleTour.bind(this);
     this.handleCallback = this.handleCallback.bind(this)
   }
@@ -37,9 +37,9 @@ class App extends Component {
     this.joyride.reset();
   }
 
-  hideWelcomeModal() {
+  toggleWelcomeModal() {
     this.setState({
-      showWelcomeModal: false
+      showWelcomeModal: !this.state.showWelcomeModal
     });
   }
 
@@ -47,6 +47,11 @@ class App extends Component {
     if (event.type === 'finished' || event.action === 'close') {
       this.toggleTour();
     }
+  }
+
+  componentDidMount() {
+    // check if path is '/'
+    if (window.location.pathname.length === 1) this.toggleWelcomeModal();
   }
 
   render() {
