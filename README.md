@@ -16,7 +16,7 @@ Note: this reference architecture is for illustrative purposes only. It is not t
 Run the install script which will clone the Blackbird repository and install the Forge and Telepresence clients locally.
 
 ```
-curl https://github.com/datawire/blackbird/blob/master/blackbird-install.sh | bash
+curl https://raw.githubusercontent.com/datawire/blackbird/master/blackbird-install.sh | bash
 ```
 
 You'll then want to deploy the Blackbird repository into your cluster. You can do this with Forge.
@@ -46,9 +46,9 @@ Get the external IP address of the Ambassador service, and open that IP in your 
 ```
 kubectl get svc ambassador -n datawire
 NAME         CLUSTER-IP     EXTERNAL-IP     PORT(S)        AGE
-ambassador   10.43.245.71   35.129.8.157   80:31807/TCP   5h
+ambassador   10.43.245.71   35.129.8.157   80:31807/TCP    5h
 ```
 
 ## Questions?
 
-Join our [Gitter chat](https://gitter.im/datawire/users).
+Join our [Gitter chat](https://gitter.im/datawire/users) or email hello@datawire.io.
