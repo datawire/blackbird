@@ -86,9 +86,9 @@ main() {
       fi
 
       if brew ls --versions telepresence > /dev/null; then
-        ensure brew install datawire/blackbird/telepresence
-      else
         ensure brew upgrade telepresence
+      else
+        ensure brew install datawire/blackbird/telepresence
       fi
     else
       err "Operating System not supported. Only macOS and Linux are supported!"
