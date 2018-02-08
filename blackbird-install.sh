@@ -79,11 +79,7 @@ main() {
       say_info $_ansi_escapes_are_valid "Detected macOS"
       need_cmd brew
       ensure brew cask install osxfuse
-      if brew ls --versions socat > /dev/null; then
-        ensure brew upgrade socat
-      else
-        ensure brew install socat
-      fi
+      ensure brew install socat
 
       if brew ls --versions telepresence > /dev/null; then
         ensure brew upgrade telepresence
