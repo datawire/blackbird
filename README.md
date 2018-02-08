@@ -1,17 +1,34 @@
-# Blackbird
+# Blackbird Reference Architecture
 
-Datawire Blackbird enables developers to code faster on Kubernetes through a cloud-native development workflow.
+This is a reference architecture that illustrates how [Telepresence](https://www.telepresence.io), [Forge](https://forge.sh), and [Ambassador](https://www.getambassador.io) can be integrated to provide an end-to-end development workflow.
 
-# Quick start
+Note: this reference architecture is for illustrative purposes only. It is not tuned for production!
 
-1. Install Docker for Mac from the *edge*, and enable Kubernetes support: see https://docs.docker.com/docker-for-mac/kubernetes/ for details.
+## Prerequisites
 
-2. Install Forge following the install instructions here: https://forge.sh/docs/tutorials/quickstart.
+* MacOS or Linux system
+* Kubernetes 1.6 or later cluster. Unfortunately, Minikube does not have full RBAC support yet, and the reference architecture uses RBAC.
+* `kubectl` configured to talk to your cluster
+* A Docker registry account on Docker Hub, Google Container Registry, Amazon ECR, Quay, etc.
 
-3. Make sure you have a Docker Registry account at https://hub.docker.com.
+## Quick start
 
-4. Run `forge setup` and enter in your Docker Registry information.
+Run the install script which will clone the Blackbird repository and install the Forge and Telepresence clients locally.
 
-5. Clone this repo, and in the top level directory of the repo, type `forge deploy`. This will deploy all the services into Kubernetes.
+```
+curl https://github.com/datawire/blackbird/blob/master/blackbird-install.sh | bash
+```
 
-6. Once the deploy is finished, go to http://localhost to see the application.
+You'll then want to deploy the Blackbird repository into your cluster. You can do this with Forge.
+
+```
+cd blackbird
+forge setup  # sets up your Docker credentials
+forge deploy # deploys all the demo services
+```
+
+Note that the deployment may take awhile. The reference architecture installs demo Java, NodeJS, and Python services, so it will take a few minutes to download the necessary dependencies and build the services.
+
+## Questions?
+
+Join our [Gitter chat](https://gitter.im/datawire/users).
