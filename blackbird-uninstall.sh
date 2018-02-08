@@ -16,10 +16,7 @@ main() {
 
     need_cmd curl
     need_cmd kubectl
-    need_cmd docker
     need_cmd git
-
-    chk_kubernetes_version 7 7
 
     local _install_dir=$(pwd)/blackbird
 
@@ -75,25 +72,6 @@ main() {
     say 'contact us at hello@datawire.io.'
 }
 
-# Only bothering to check the minor version of Kubernetes. All bets are off if the major
-# version increases.
-chk_kubernetes_version() {
-    local _min_allowed_client_version=$1
-    local _min_allowed_server_version=$2
-
-    local _version_json=$(ensure kubectl version --output json)
-    local _client_minor=$(ensure echo $_version_json | ensure python -c 'import json,sys; obj=json.load(sys.stdin); print(obj["clientVersion"]["minor"]);' | ensure sed 's/[^0-9]*//g')
-    local _server_minor=$(ensure echo $_version_json | ensure python -c 'import json,sys; obj=json.load(sys.stdin); print(obj["serverVersion"]["minor"]);' | ensure sed 's/[^0-9]*//g')
-
-    if [ "$_client_minor" -lt "$_min_allowed_client_version" ]; then
-        err "Your kubectl version is too outdated. You need at least 1.$_min_allowed_client_version. Please upgrade."
-    fi
-
-    if [ "$_server_minor" -lt "$_min_allowed_server_version" ]; then
-        err "Your Kubernetes cluster version is too outdated. Need at least 1.$_min_allowed_server_version. Please upgrade."
-    fi
-}
-
 say() {
     echo "blackbird: $1"
 }
@@ -103,7 +81,7 @@ say_info() {
     local _msg=$2
 
     if $_ansi_escapes_are_valid; then
-        printf "\e[31minfo:\e[0m $_msg\n" 1>&2
+        printf "\e[32minfo:\e[0m $_msg\n" 1>&2
     else
         printf '%s\n' "info: $_msg" 1>&2
     fi
