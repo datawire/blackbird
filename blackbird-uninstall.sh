@@ -2,8 +2,6 @@
 
 set -u
 
-BLACKBIRD_REPO="https://github.com/datawire/blackbird.git"
-
 main() {
     local _ansi_escapes_are_valid=false
     if [ -t 2 ]; then
@@ -25,37 +23,13 @@ main() {
 
     local _install_dir=$(pwd)/blackbird
 
-    say_info $_ansi_escapes_are_valid "Installing the Datawire Reference Architecture"
+    say_info $_ansi_escapes_are_valid "Uninstalling the Datawire Reference Architecture."
 
-    # --------------------------------------------------------------------------
-    # Local installation
-    # --------------------------------------------------------------------------
+    # Remove Forge
+    say_info $_ansi_escapes_are_valid "Uninstalling Forge."
+    ensure sudo rm -rf /usr/local/bin/forge
 
-    #
-    # Blackbird Repo
-    #
-    say_info $_ansi_escapes_are_valid "Cloning repository"
-    ensure git clone --quiet $BLACKBIRD_REPO $_install_dir
-    ensure cd $_install_dir
-
-    #
-    # Forge Install
-    #
-    say_info $_ansi_escapes_are_valid "Downloading Forge for deployment"
-    local _forge_version="$(curl --silent https://s3.amazonaws.com/datawire-static-files/forge/latest.url?x-download=blackbird)"
-    ensure curl \
-        --location \
-        --output /tmp/forge \
-        --silent \
-        https://s3.amazonaws.com/datawire-static-files/forge/$_forge_version/forge?x-download=blackbird
-
-    say_info $_ansi_escapes_are_valid "Installing Forge into /usr/local/bin (this may require root)"
-    ensure sudo -s mkdir -p /usr/local/bin
-    ensure sudo -s chmod 777 /usr/local/bin
-    ensure sudo -s mv /tmp/forge /usr/local/bin
-    ensure chmod +x /usr/local/bin/forge
-
-    say_info $_ansi_escapes_are_valid "Installing Telepresence for local development"
+    # Uninstall Telepresence
 
     # Detect if macOS, Ubuntu or Fedora
     local _platform="$(uname | tr "[:upper:]" "[:lower:]")"
@@ -64,13 +38,11 @@ main() {
       case $(lsb_release -d) in
         *Ubuntu*)
           say_info $_ansi_escapes_are_valid "Detected Ubuntu"
-          ensure curl -s https://packagecloud.io/install/repositories/datawireio/telepresence/script.deb.sh | ensure sudo -s bash
-          ensure apt install --no-install-recommends telepresence
+          ensure apt remove telepresence
           ;;
         *Fedora*)
           say_info $_ansi_escapes_are_valid "Detected Fedora"
-          ensure curl -s https://packagecloud.io/install/repositories/datawireio/telepresence/script.rpm.sh | ensure sudo -s bash
-          ensure sudo -s dnf install telepresence
+          ensure sudo -s dnf remove telepresence
           ;;
         *)
           err "Telepresence not supported on this OS!"
@@ -78,62 +50,29 @@ main() {
     elif [[ "$_platform" == "darwin" ]]; then
       say_info $_ansi_escapes_are_valid "Detected macOS"
       need_cmd brew
-      ensure brew cask install osxfuse
-      if brew ls --versions socat > /dev/null; then
-        ensure brew install socat
-      else
-        ensure brew upgrade socat
-      fi
-
-      if brew ls --versions telepresence > /dev/null; then
-        ensure brew install datawire/blackbird/telepresence
-      else
-        ensure brew upgrade telepresence
-      fi
+      ensure brew uninstall telepresence --force
+      ensure brew cask uninstall osxfuse
+      ensure brew uninstall socat --force
     else
       err "Operating System not supported. Only macOS and Linux are supported!"
     fi
 
 
-    say_info $_ansi_escapes_are_valid "Configuring Blackbird to use the latest Ambassador API Gateway"
-    local _ambassador_version="$(curl --silent https://s3.amazonaws.com/datawire-static-files/ambassador/stable.txt)"
-    ensure sed -i"" -e "s|__AMBASSADOR_VERSION__|$_ambassador_version|g" ambassador/service.yaml
-
     # --------------------------------------------------------------------------
-    # kubernetes cluster installation
+    # kubernetes cluster uninstall
     # --------------------------------------------------------------------------
 
-	while true; do
-		read -p "Are you using a Google Kubernetes Engine (GKE) cluster [y/n]? " _yn </dev/tty
-		case $_yn in
-			[Yy]* )
-				need_cmd gcloud
-				say_info $_ansi_escapes_are_valid "Creating RBAC cluster admin role binding"
-				ensure kubectl create clusterrolebinding \
-                dw-cluster-admin-binding \
-                --clusterrole=cluster-admin \
-                --user=$(ensure gcloud info --format="value(config.account)")
-				break
-				;;
-			[Nn]* )
-				break
-				;;
-			* )
-				say "Please answer [y]es or [n]o."
-				;;
-		esac
-	done
+    say_info $_ansi_escapes_are_valid "Removing the Reference Architecture from your Kubernetes cluster"
+
+    ensure kubectl delete deploy --all --namespace datawire
+    ensure kubectl delete svc --all --namespace datawire
+    ensure kubectl delete ns datawire
 
     echo ""
-    say 'The Datawire Reference Architecture has been configured locally.'
-    say 'You now need to deploy the demo application and its dependencies to your Kubernetes cluster.'
-    say 'Please run the following commands:'
-    say '    cd blackbird'
-    say '    forge setup'
-    say '    forge deploy'
-    say 'Note that the deployment process may take a few minutes as'
-    say 'it builds Java, NodeJS, and Python microservices.'
-    say 'Thanks for installing the Datawire reference architecture.'
+    say 'The Datawire Reference Architecture has been uninstalled from your laptop and cluster.'
+    say 'Thanks for your time! If you have any questions, please visit'
+    say 'https://www.datawire.io for more information or'
+    say 'contact us at hello@datawire.io.'
 }
 
 # Only bothering to check the minor version of Kubernetes. All bets are off if the major
