@@ -80,12 +80,7 @@ main() {
       need_cmd brew
       ensure brew cask install osxfuse
       ensure brew install socat
-
-      if brew ls --versions telepresence > /dev/null; then
-        ensure brew upgrade telepresence
-      else
-        ensure brew install datawire/blackbird/telepresence
-      fi
+      ensure brew install datawire/blackbird/telepresence
     else
       err "Operating System not supported. Only macOS and Linux are supported!"
     fi
