@@ -80,9 +80,9 @@ main() {
       need_cmd brew
       ensure brew cask install osxfuse
       if brew ls --versions socat > /dev/null; then
-        ensure brew install socat
-      else
         ensure brew upgrade socat
+      else
+        ensure brew install socat
       fi
 
       if brew ls --versions telepresence > /dev/null; then
