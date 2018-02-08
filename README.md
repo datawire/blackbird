@@ -29,6 +29,26 @@ forge deploy # deploys all the demo services
 
 Note that the deployment may take awhile. The reference architecture installs demo Java, NodeJS, and Python services, so it will take a few minutes to download the necessary dependencies and build the services.
 
+Once deployment is complete, you should have a number of pods running in the `datawire` namespace.
+
+```
+kubectl get pod -n datawire
+NAME                                      READY     STATUS    RESTARTS   AGE
+ambassador-77496977dd-fr8rp               2/2       Running   0          3h
+java-spring-api-stable-69c97b99c9-xm9kc   1/1       Running   0          5h
+nodejs-api-stable-646fbc999d-zh2qd        1/1       Running   0          5h
+python-api-stable-5799cdc89d-wg85h        1/1       Running   0          5h
+ui-stable-749846897c-hk466                1/1       Running   0          4h
+```
+
+Get the external IP address of the Ambassador service, and open that IP in your browser. You should see the Reference Architecture walk-through.
+
+```
+kubectl get svc ambassador -n datawire
+NAME         CLUSTER-IP     EXTERNAL-IP     PORT(S)        AGE
+ambassador   10.43.245.71   35.129.8.157   80:31807/TCP   5h
+```
+
 ## Questions?
 
 Join our [Gitter chat](https://gitter.im/datawire/users).
