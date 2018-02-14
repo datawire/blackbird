@@ -61,8 +61,6 @@ main() {
 
     say_info $_ansi_escapes_are_valid "Removing the Reference Architecture from your Kubernetes cluster"
 
-    ensure kubectl delete deploy --all --namespace datawire
-    ensure kubectl delete svc --all --namespace datawire
     ensure kubectl delete ns datawire
 
     echo ""
