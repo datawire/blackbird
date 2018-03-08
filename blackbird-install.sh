@@ -65,7 +65,7 @@ main() {
         *Ubuntu*)
           say_info $_ansi_escapes_are_valid "Detected Ubuntu"
           ensure curl -s https://packagecloud.io/install/repositories/datawireio/telepresence/script.deb.sh | ensure sudo -s bash
-          ensure apt install --no-install-recommends telepresence
+          ensure sudo apt install --no-install-recommends telepresence
           ;;
         *Fedora*)
           say_info $_ansi_escapes_are_valid "Detected Fedora"
