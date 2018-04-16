@@ -65,12 +65,12 @@ main() {
         *Ubuntu*)
           say_info $_ansi_escapes_are_valid "Detected Ubuntu"
           ensure curl -s https://packagecloud.io/install/repositories/datawireio/telepresence/script.deb.sh | ensure sudo -s bash
-          ensure sudo apt install --no-install-recommends telepresence
+          ensure sudo apt install --no-install-recommends -y telepresence
           ;;
         *Fedora*)
           say_info $_ansi_escapes_are_valid "Detected Fedora"
           ensure curl -s https://packagecloud.io/install/repositories/datawireio/telepresence/script.rpm.sh | ensure sudo -s bash
-          ensure sudo -s dnf install telepresence
+          ensure sudo -s dnf -y install telepresence
           ;;
         *)
           err "Telepresence not supported on this OS!"
